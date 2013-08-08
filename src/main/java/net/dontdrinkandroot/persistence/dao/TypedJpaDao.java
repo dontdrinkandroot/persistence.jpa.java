@@ -30,6 +30,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import net.dontdrinkandroot.persistence.entity.Entity;
 import net.dontdrinkandroot.persistence.predicatebuilder.PredicateBuilder;
 
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -55,7 +56,7 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 
 	@Override
-	@Transactional
+	@Transactional(propagation = Propagation.MANDATORY)
 	public void delete(final E entity) {
 
 		super.delete(entity, this.entityClass);
@@ -63,7 +64,7 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 
 	@Override
-	@Transactional
+	@Transactional(propagation = Propagation.MANDATORY)
 	public void delete(final I id) {
 
 		super.delete(id, this.entityClass);
@@ -71,7 +72,7 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
 	public E find(final I id) {
 
 		return super.find(id, this.entityClass);
@@ -79,7 +80,7 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
 	public long getCount() {
 
 		return super.getCount(this.entityClass);
@@ -87,7 +88,7 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
 	public E load(final I id) {
 
 		return super.load(id, this.entityClass);
@@ -95,7 +96,7 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
 	public List<E> findAll() {
 
 		return super.findAll(this.entityClass);
@@ -103,7 +104,7 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
 	public List<E> findAll(final SingularAttribute<? super E, ?> attribute, final boolean asc) {
 
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
@@ -121,7 +122,7 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
 	public List<E> findAll(
 			final SingularAttribute<? super E, ?> attribute,
 			final boolean asc,
@@ -145,7 +146,7 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
 	public List<E> findAll(final PredicateBuilder<E> filter) {
 
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
@@ -159,7 +160,7 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
 	public List<E> findAll(final Collection<PredicateBuilder<E>> filters) {
 
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
@@ -180,7 +181,7 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
 	public List<E> findAll(final PredicateBuilder<E>... filters) {
 
 		final CriteriaBuilder builder = this.getCriteriaBuilder();

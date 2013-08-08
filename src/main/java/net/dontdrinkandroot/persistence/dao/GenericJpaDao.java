@@ -32,6 +32,7 @@ import net.dontdrinkandroot.persistence.entity.Entity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -73,7 +74,7 @@ public class GenericJpaDao implements GenericDao {
 
 
 	@Override
-	@Transactional
+	@Transactional(propagation = Propagation.MANDATORY)
 	public <E extends Entity<K>, K> void delete(final E entity, final Class<E> clazz) {
 
 		if (entity == null) {
@@ -91,7 +92,7 @@ public class GenericJpaDao implements GenericDao {
 
 
 	@Override
-	@Transactional
+	@Transactional(propagation = Propagation.MANDATORY)
 	public <E extends Entity<K>, K> void delete(final K id, final Class<E> clazz) {
 
 		if (id == null) {
@@ -107,7 +108,7 @@ public class GenericJpaDao implements GenericDao {
 
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
 	public <E extends Entity<K>, K> E find(final K id, final Class<E> clazz) {
 
 		return this.getEntityManager().find(clazz, id);
@@ -115,7 +116,7 @@ public class GenericJpaDao implements GenericDao {
 
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
 	public <E extends Entity<K>, K> List<E> findAll(final Class<E> clazz) {
 
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
@@ -127,7 +128,7 @@ public class GenericJpaDao implements GenericDao {
 
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
 	public <E extends Entity<K>, K> E load(final K id, final Class<E> clazz) {
 
 		final E entity = this.getEntityManager().find(clazz, id);
@@ -140,7 +141,7 @@ public class GenericJpaDao implements GenericDao {
 
 
 	@Override
-	@Transactional
+	@Transactional(propagation = Propagation.MANDATORY)
 	public <E extends Entity<K>, K> E save(final E entity) {
 
 		final E mergedEntity = this.getEntityManager().merge(entity);
@@ -150,7 +151,7 @@ public class GenericJpaDao implements GenericDao {
 
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
 	public <E extends Entity<K>, K> long getCount(final Class<E> clazz) {
 
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
