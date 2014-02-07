@@ -28,11 +28,11 @@
 	</scm>
 
 	<properties>
-		<org.springframework.spring.version>3.2.2.RELEASE</org.springframework.spring.version>
-		<cglib.version>2.2.2</cglib.version>
-		<org.hsqldb.version>2.2.9</org.hsqldb.version>
+		<org.springframework.spring.version>4.0.1.RELEASE</org.springframework.spring.version>
+		<cglib.version>3.1</cglib.version>
+		<org.hsqldb.version>2.3.1</org.hsqldb.version>
 		<org.apache.commons.dbcp.version>1.4</org.apache.commons.dbcp.version>
-		<org.hibernate.version>4.2.0.Final</org.hibernate.version>
+		<org.hibernate.version>4.3.1.Final</org.hibernate.version>
 		<org.hibernate.jpamodelgen.version>1.2.0.Final</org.hibernate.jpamodelgen.version>
 	</properties>
 
