@@ -241,4 +241,22 @@ public class GenericJpaDao implements GenericDao {
 			return null;
 		}
 	}
+
+
+	/**
+	 * Finds the first entity by the given {@link CriteriaQuery} or null if no result was found.
+	 * 
+	 * @param criteriaQuery
+	 *            Query to execute.
+	 * @return The found entity or null if there was none found.
+	 */
+	protected <V> V findFirstOrNull(CriteriaQuery<V> criteriaQuery) {
+
+		List<V> results = this.find(criteriaQuery, 1);
+		if (results.isEmpty()) {
+			return null;
+		}
+
+		return results.iterator().next();
+	}
 }
