@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>net.dontdrinkandroot</groupId>
 		<artifactId>parent</artifactId>
-		<version>5-SNAPSHOT</version>
+		<version>5</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>persistence.jpa</artifactId>
@@ -32,7 +32,7 @@
 		<cglib.version>3.1</cglib.version>
 		<org.hsqldb.version>2.3.2</org.hsqldb.version>
 		<org.apache.commons.dbcp.version>1.4</org.apache.commons.dbcp.version>
-		<org.hibernate.version>4.3.4.Final</org.hibernate.version>
+		<org.hibernate.version>4.3.5.Final</org.hibernate.version>
 	</properties>
 
 	<dependencies>
