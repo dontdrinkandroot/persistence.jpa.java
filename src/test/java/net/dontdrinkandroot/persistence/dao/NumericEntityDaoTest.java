@@ -37,18 +37,19 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:database.xml" })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
-public class NumericEntityDaoTest extends TypedJpaDao<NumericEntity, Long> {
+public class NumericEntityDaoTest extends TypedJpaDao<NumericEntity, Long>
+{
 
-	public NumericEntityDaoTest() {
-
+	public NumericEntityDaoTest()
+	{
 		super(NumericEntity.class);
 	}
 
 
 	@Test
 	@Transactional
-	public void someBla() {
-
+	public void someBla()
+	{
 		NumericEntity entity = new NumericEntity();
 		entity = this.save(entity);
 
@@ -58,8 +59,8 @@ public class NumericEntityDaoTest extends TypedJpaDao<NumericEntity, Long> {
 
 	@Test
 	@Transactional
-	public void testQuot() {
-
+	public void testQuot()
+	{
 		NumericEntity entity2 = new NumericEntity();
 		entity2.setLongField(2L);
 		entity2.setIntField(3);

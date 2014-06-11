@@ -38,7 +38,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:database.xml" })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
-public class DaosTest {
+public class DaosTest
+{
 
 	@Autowired
 	private ExampleIdEntityDao entityDao;
@@ -49,8 +50,8 @@ public class DaosTest {
 
 	@Test
 	@Transactional
-	public void testExampleEntityDao() {
-
+	public void testExampleEntityDao()
+	{
 		Assert.assertEquals(0, this.entityDao.findAll().size());
 
 		final ExampleIdEntity ex1 = new ExampleIdEntity(1L);
@@ -77,8 +78,8 @@ public class DaosTest {
 
 	@Test
 	@Transactional
-	public void testExampleGeneratedIdEntityDao() {
-
+	public void testExampleGeneratedIdEntityDao()
+	{
 		Assert.assertEquals(0, this.generatedIdEntityDao.findAll().size());
 
 		ExampleGeneratedIdEntity ex1 = new ExampleGeneratedIdEntity();
@@ -105,8 +106,8 @@ public class DaosTest {
 
 	@Test
 	@Transactional
-	public void testGetCount() {
-
+	public void testGetCount()
+	{
 		this.generatedIdEntityDao.save(new ExampleGeneratedIdEntity());
 		this.generatedIdEntityDao.save(new ExampleGeneratedIdEntity());
 
@@ -119,7 +120,8 @@ public class DaosTest {
 
 	@Test
 	@Transactional
-	public void testFindMaxEnum() {
+	public void testFindMaxEnum()
+	{
 
 		this.generatedIdEntityDao.save(new ExampleGeneratedIdEntity().setExampleEnum(ExampleEnum.FIRST));
 		this.generatedIdEntityDao.save(new ExampleGeneratedIdEntity().setExampleEnum(ExampleEnum.SECOND));
@@ -131,8 +133,8 @@ public class DaosTest {
 
 	@Test
 	@Transactional
-	public void testFindPaginated() {
-
+	public void testFindPaginated()
+	{
 		final ExampleGeneratedIdEntity ex1 =
 				this.generatedIdEntityDao.save(new ExampleGeneratedIdEntity()).setNumericValue(4);
 		final ExampleGeneratedIdEntity ex2 =
@@ -159,8 +161,8 @@ public class DaosTest {
 
 	@Test
 	@Transactional
-	public void testFindByJoin() {
-
+	public void testFindByJoin()
+	{
 		ExampleIdEntity otherOne = new ExampleIdEntity(1, "one");
 		ExampleIdEntity otherTwo = new ExampleIdEntity(2, "two");
 		ExampleIdEntity otherThree = new ExampleIdEntity(3, "three");

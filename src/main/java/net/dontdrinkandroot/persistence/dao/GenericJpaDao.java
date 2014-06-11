@@ -41,7 +41,8 @@ import org.springframework.transaction.annotation.Transactional;
  * 
  * @author Philip W. Sorst <philip@sorst.net>
  */
-public class GenericJpaDao implements GenericDao {
+public class GenericJpaDao implements GenericDao
+{
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -49,34 +50,34 @@ public class GenericJpaDao implements GenericDao {
 
 
 	@PersistenceContext
-	public void setEntityManager(final EntityManager entityManager) {
-
+	public void setEntityManager(final EntityManager entityManager)
+	{
 		this.entityManager = entityManager;
 	}
 
 
-	public EntityManager getEntityManager() {
-
+	public EntityManager getEntityManager()
+	{
 		return this.entityManager;
 	}
 
 
-	public Logger getLogger() {
-
+	public Logger getLogger()
+	{
 		return this.logger;
 	}
 
 
-	public void setLogger(final Logger logger) {
-
+	public void setLogger(final Logger logger)
+	{
 		this.logger = logger;
 	}
 
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY)
-	public <E extends Entity<K>, K> void delete(final E entity, final Class<E> clazz) {
-
+	public <E extends Entity<K>, K> void delete(final E entity, final Class<E> clazz)
+	{
 		if (entity == null) {
 			return;
 		}
@@ -93,8 +94,8 @@ public class GenericJpaDao implements GenericDao {
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY)
-	public <E extends Entity<K>, K> void delete(final K id, final Class<E> clazz) {
-
+	public <E extends Entity<K>, K> void delete(final K id, final Class<E> clazz)
+	{
 		if (id == null) {
 			return;
 		}
@@ -109,16 +110,16 @@ public class GenericJpaDao implements GenericDao {
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public <E extends Entity<K>, K> E find(final K id, final Class<E> clazz) {
-
+	public <E extends Entity<K>, K> E find(final K id, final Class<E> clazz)
+	{
 		return this.getEntityManager().find(clazz, id);
 	}
 
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public <E extends Entity<K>, K> List<E> findAll(final Class<E> clazz) {
-
+	public <E extends Entity<K>, K> List<E> findAll(final Class<E> clazz)
+	{
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
 		final CriteriaQuery<E> criteriaQuery = builder.createQuery(clazz);
 		criteriaQuery.from(clazz);
@@ -129,8 +130,8 @@ public class GenericJpaDao implements GenericDao {
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public <E extends Entity<K>, K> E load(final K id, final Class<E> clazz) {
-
+	public <E extends Entity<K>, K> E load(final K id, final Class<E> clazz)
+	{
 		final E entity = this.getEntityManager().find(clazz, id);
 		if (entity == null) {
 			throw new NoResultException();
@@ -142,8 +143,8 @@ public class GenericJpaDao implements GenericDao {
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY)
-	public <E extends Entity<K>, K> E save(final E entity) {
-
+	public <E extends Entity<K>, K> E save(final E entity)
+	{
 		final E mergedEntity = this.getEntityManager().merge(entity);
 
 		return mergedEntity;
@@ -152,8 +153,8 @@ public class GenericJpaDao implements GenericDao {
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public <E extends Entity<K>, K> long getCount(final Class<E> clazz) {
-
+	public <E extends Entity<K>, K> long getCount(final Class<E> clazz)
+	{
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
 		final CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
 		final Root<E> from = criteriaQuery.from(clazz);
@@ -169,8 +170,8 @@ public class GenericJpaDao implements GenericDao {
 	/**
 	 * Gets the criteria builder of the entity manager.
 	 */
-	protected CriteriaBuilder getCriteriaBuilder() {
-
+	protected CriteriaBuilder getCriteriaBuilder()
+	{
 		return this.getEntityManager().getCriteriaBuilder();
 	}
 
@@ -178,8 +179,8 @@ public class GenericJpaDao implements GenericDao {
 	/**
 	 * Find all entities by the given {@link CriteriaQuery}.
 	 */
-	protected <V> List<V> find(final CriteriaQuery<V> criteriaQuery) {
-
+	protected <V> List<V> find(final CriteriaQuery<V> criteriaQuery)
+	{
 		return this.getEntityManager().createQuery(criteriaQuery).getResultList();
 	}
 
@@ -190,8 +191,8 @@ public class GenericJpaDao implements GenericDao {
 	 * @param maxResults
 	 *            The maximum number of results to retrieve.
 	 */
-	protected <V> List<V> find(final CriteriaQuery<V> criteriaQuery, final int maxResults) {
-
+	protected <V> List<V> find(final CriteriaQuery<V> criteriaQuery, final int maxResults)
+	{
 		final TypedQuery<V> query = this.getEntityManager().createQuery(criteriaQuery);
 		query.setMaxResults(maxResults);
 
@@ -207,8 +208,8 @@ public class GenericJpaDao implements GenericDao {
 	 * @param maxResults
 	 *            The maximum number of results to retrieve.
 	 */
-	protected <V> List<V> find(final CriteriaQuery<V> criteriaQuery, final int firstResult, final int maxResults) {
-
+	protected <V> List<V> find(final CriteriaQuery<V> criteriaQuery, final int firstResult, final int maxResults)
+	{
 		final TypedQuery<V> query = this.getEntityManager().createQuery(criteriaQuery);
 		query.setMaxResults(maxResults);
 		query.setFirstResult(firstResult);
@@ -218,23 +219,22 @@ public class GenericJpaDao implements GenericDao {
 
 
 	/**
-	 * Find a single entity by the given {@link CriteriaQuery}, throws an Exception if there is no
-	 * or more than one result.
+	 * Find a single entity by the given {@link CriteriaQuery}, throws an Exception if there is no or more than one
+	 * result.
 	 */
-	protected <V> V findSingle(final CriteriaQuery<V> criteriaQuery) {
-
+	protected <V> V findSingle(final CriteriaQuery<V> criteriaQuery)
+	{
 		return this.getEntityManager().createQuery(criteriaQuery).getSingleResult();
 	}
 
 
 	/**
-	 * Finds a single entity by the given {@link CriteriaQuery}, throws an Exception if there is
-	 * more than one result.
+	 * Finds a single entity by the given {@link CriteriaQuery}, throws an Exception if there is more than one result.
 	 * 
 	 * @return The found entity or null if there was none found.
 	 */
-	protected <V> V findSingleOrNull(final CriteriaQuery<V> criteriaQuery) {
-
+	protected <V> V findSingleOrNull(final CriteriaQuery<V> criteriaQuery)
+	{
 		try {
 			return this.getEntityManager().createQuery(criteriaQuery).getSingleResult();
 		} catch (final NoResultException e) {
@@ -250,8 +250,8 @@ public class GenericJpaDao implements GenericDao {
 	 *            Query to execute.
 	 * @return The found entity or null if there was none found.
 	 */
-	protected <V> V findFirstOrNull(CriteriaQuery<V> criteriaQuery) {
-
+	protected <V> V findFirstOrNull(CriteriaQuery<V> criteriaQuery)
+	{
 		List<V> results = this.find(criteriaQuery, 1);
 		if (results.isEmpty()) {
 			return null;

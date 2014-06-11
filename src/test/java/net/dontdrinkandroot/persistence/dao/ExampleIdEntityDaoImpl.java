@@ -20,9 +20,11 @@ package net.dontdrinkandroot.persistence.dao;
 import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
 
 
-public class ExampleIdEntityDaoImpl extends TypedJpaDao<ExampleIdEntity, Long> implements ExampleIdEntityDao {
+public class ExampleIdEntityDaoImpl extends TypedJpaDao<ExampleIdEntity, Long> implements ExampleIdEntityDao
+{
 
-	public ExampleIdEntityDaoImpl() {
+	public ExampleIdEntityDaoImpl()
+	{
 
 		super(ExampleIdEntity.class);
 	}

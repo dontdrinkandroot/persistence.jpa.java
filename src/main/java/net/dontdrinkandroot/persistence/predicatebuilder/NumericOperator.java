@@ -17,8 +17,13 @@
  */
 package net.dontdrinkandroot.persistence.predicatebuilder;
 
-public enum NumericOperator {
+public enum NumericOperator
+{
 
-	EQUALS, GREATER_THAN, GREATER_EQUALS, LESS_THAN, LESS_EQUALS;
+	EQUALS,
+	GREATER_THAN,
+	GREATER_EQUALS,
+	LESS_THAN,
+	LESS_EQUALS;
 
 }

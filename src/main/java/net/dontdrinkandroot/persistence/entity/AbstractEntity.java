@@ -21,11 +21,10 @@ import javax.persistence.MappedSuperclass;
 
 
 /**
- * Represents an entity with a primary key. The method getId() must be implemented, even if the
- * primary key has a different field name, also make sure that the primary key implements
- * equals/hashcode correctly. hashCode() and equals() are based on the id, so make sure not to use
- * id in any context where these methods are important while no id is set (e.g. in HashMaps) or you
- * must override them.
+ * Represents an entity with a primary key. The method getId() must be implemented, even if the primary key has a
+ * different field name, also make sure that the primary key implements equals/hashcode correctly. hashCode() and
+ * equals() are based on the id, so make sure not to use id in any context where these methods are important while no id
+ * is set (e.g. in HashMaps) or you must override them.
  * 
  * @param <K>
  *            Type of the primary key.
@@ -33,27 +32,28 @@ import javax.persistence.MappedSuperclass;
  * @author Philip W. Sorst
  */
 @MappedSuperclass
-public abstract class AbstractEntity<K> implements Entity<K> {
+public abstract class AbstractEntity<K> implements Entity<K>
+{
 
 	/**
 	 * Constructs an entity without the primary key being set.
 	 */
-	public AbstractEntity() {
-
+	public AbstractEntity()
+	{
 		/* Noop */
 	}
 
 
 	@Override
-	public String toString() {
-
+	public String toString()
+	{
 		return this.getClass().getSimpleName() + "[id=" + this.getId() + "]";
 	}
 
 
 	@Override
-	public int hashCode() {
-
+	public int hashCode()
+	{
 		/* Only considers the id if set */
 		final int prime = 31;
 		int result = 1;
@@ -63,8 +63,8 @@ public abstract class AbstractEntity<K> implements Entity<K> {
 
 
 	@Override
-	public boolean equals(final Object obj) {
-
+	public boolean equals(final Object obj)
+	{
 		if (this == obj) {
 			/* Identity */
 			return true;

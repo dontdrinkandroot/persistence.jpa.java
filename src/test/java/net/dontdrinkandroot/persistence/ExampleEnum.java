@@ -17,8 +17,10 @@
  */
 package net.dontdrinkandroot.persistence;
 
-public enum ExampleEnum {
+public enum ExampleEnum
+{
 
-	FIRST, SECOND;
+	FIRST,
+	SECOND;
 
 }

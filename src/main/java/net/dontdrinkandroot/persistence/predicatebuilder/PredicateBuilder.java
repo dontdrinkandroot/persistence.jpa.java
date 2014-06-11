@@ -32,7 +32,8 @@ import net.dontdrinkandroot.persistence.entity.Entity;
  * 
  * @author Philip W. Sorst <philip@sorst.net>
  */
-public interface PredicateBuilder<E> {
+public interface PredicateBuilder<E>
+{
 
 	/**
 	 * Builds a predicate with the given builder that is derived from the given path.

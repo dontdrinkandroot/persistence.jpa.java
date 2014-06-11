@@ -22,8 +22,8 @@ import java.util.List;
 import net.dontdrinkandroot.persistence.entity.ExampleGeneratedIdEntity;
 import net.dontdrinkandroot.persistence.entity.ExampleGeneratedIdEntity_;
 import net.dontdrinkandroot.persistence.predicatebuilder.NullPredicateBuilder;
-import net.dontdrinkandroot.persistence.predicatebuilder.NumericPredicateBuilder;
 import net.dontdrinkandroot.persistence.predicatebuilder.NumericOperator;
+import net.dontdrinkandroot.persistence.predicatebuilder.NumericPredicateBuilder;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -38,7 +38,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:database.xml" })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
-public class PredicateBuilderTest {
+public class PredicateBuilderTest
+{
 
 	@Autowired
 	private ExampleGeneratedIdEntityDao generatedIdEntityDao;
@@ -46,8 +47,8 @@ public class PredicateBuilderTest {
 
 	@Test
 	@Transactional
-	public void testNumericFilters() {
-
+	public void testNumericFilters()
+	{
 		ExampleGeneratedIdEntity e1 = new ExampleGeneratedIdEntity().setNumericValue(1);
 		e1 = this.generatedIdEntityDao.save(e1);
 		ExampleGeneratedIdEntity e2 = new ExampleGeneratedIdEntity().setNumericValue(2);
@@ -109,8 +110,8 @@ public class PredicateBuilderTest {
 
 	@Test
 	@Transactional
-	public void testNullFilters() {
-
+	public void testNullFilters()
+	{
 		ExampleGeneratedIdEntity e1 = new ExampleGeneratedIdEntity();
 		e1 = this.generatedIdEntityDao.save(e1);
 		ExampleGeneratedIdEntity e2 = new ExampleGeneratedIdEntity().setNumericValue(1);

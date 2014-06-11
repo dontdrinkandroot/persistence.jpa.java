@@ -22,26 +22,27 @@ import javax.persistence.MappedSuperclass;
 
 
 @MappedSuperclass
-public class LongIdEntity extends AbstractEntity<Long> {
+public class LongIdEntity extends AbstractEntity<Long>
+{
 
 	@Id
 	private Long id;
 
 
-	protected LongIdEntity() {
-
+	protected LongIdEntity()
+	{
 	}
 
 
-	public LongIdEntity(final Long id) {
-
+	public LongIdEntity(final Long id)
+	{
 		this.id = id;
 	}
 
 
 	@Override
-	public Long getId() {
-
+	public Long getId()
+	{
 		return this.id;
 	}
 

@@ -27,7 +27,8 @@ import net.dontdrinkandroot.persistence.entity.Entity;
  * 
  * @author Philip W. Sorst <philip@sorst.net>
  */
-public interface GenericDao {
+public interface GenericDao
+{
 
 	/**
 	 * Saves the given entity.
@@ -62,8 +63,7 @@ public interface GenericDao {
 
 
 	/**
-	 * Loads the entity with the given id of the given class or throws an Exception if it was not
-	 * found.
+	 * Loads the entity with the given id of the given class or throws an Exception if it was not found.
 	 */
 	<E extends Entity<K>, K> E load(final K id, final Class<E> clazz);
 

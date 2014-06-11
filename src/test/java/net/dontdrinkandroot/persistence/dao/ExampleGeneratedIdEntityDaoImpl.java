@@ -34,18 +34,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 public class ExampleGeneratedIdEntityDaoImpl extends TypedJpaDao<ExampleGeneratedIdEntity, Long>
-		implements ExampleGeneratedIdEntityDao {
+		implements ExampleGeneratedIdEntityDao
+{
 
-	public ExampleGeneratedIdEntityDaoImpl() {
-
+	public ExampleGeneratedIdEntityDaoImpl()
+	{
 		super(ExampleGeneratedIdEntity.class);
 	}
 
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<ExampleGeneratedIdEntity> findByOtherText(final String text) {
-
+	public List<ExampleGeneratedIdEntity> findByOtherText(final String text)
+	{
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
 		final CriteriaQuery<ExampleGeneratedIdEntity> criteriaQuery = builder.createQuery(this.entityClass);
 		criteriaQuery.distinct(true);
@@ -62,8 +63,8 @@ public class ExampleGeneratedIdEntityDaoImpl extends TypedJpaDao<ExampleGenerate
 
 	@Override
 	@Transactional(readOnly = true)
-	public ExampleEnum findMaxEnum() {
-
+	public ExampleEnum findMaxEnum()
+	{
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
 		final CriteriaQuery<ExampleEnum> criteriaQuery = builder.createQuery(ExampleEnum.class);
 		final Root<ExampleGeneratedIdEntity> root = criteriaQuery.from(this.entityClass);
@@ -84,8 +85,8 @@ public class ExampleGeneratedIdEntityDaoImpl extends TypedJpaDao<ExampleGenerate
 
 	@Override
 	@Transactional(readOnly = true)
-	public ExampleGeneratedIdEntity findWithOthersFetchJoin(final Long id) {
-
+	public ExampleGeneratedIdEntity findWithOthersFetchJoin(final Long id)
+	{
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
 		final CriteriaQuery<ExampleGeneratedIdEntity> criteriaQuery =
 				builder.createQuery(ExampleGeneratedIdEntity.class);

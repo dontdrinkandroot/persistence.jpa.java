@@ -21,15 +21,19 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
+
 import net.dontdrinkandroot.persistence.ExampleEnum;
+
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(ExampleGeneratedIdEntity.class)
-public abstract class ExampleGeneratedIdEntity_ extends net.dontdrinkandroot.persistence.entity.GeneratedLongIdEntity_ {
+public abstract class ExampleGeneratedIdEntity_ extends net.dontdrinkandroot.persistence.entity.GeneratedLongIdEntity_
+{
 
 	public static volatile SingularAttribute<ExampleGeneratedIdEntity, Integer> numericValue;
+
 	public static volatile SingularAttribute<ExampleGeneratedIdEntity, ExampleEnum> exampleEnum;
+
 	public static volatile ListAttribute<ExampleGeneratedIdEntity, ExampleIdEntity> otherEntities;
 
 }
-

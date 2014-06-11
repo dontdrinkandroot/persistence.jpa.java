@@ -21,11 +21,12 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
+
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(ExampleIdEntity.class)
-public abstract class ExampleIdEntity_ extends net.dontdrinkandroot.persistence.entity.AbstractIdEntity_ {
+public abstract class ExampleIdEntity_ extends net.dontdrinkandroot.persistence.entity.AbstractIdEntity_
+{
 
 	public static volatile SingularAttribute<ExampleIdEntity, String> text;
 
 }
-

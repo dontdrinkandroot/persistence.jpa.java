@@ -22,7 +22,8 @@ import javax.persistence.Entity;
 
 
 @Entity
-public class NumericEntity extends AbstractGeneratedIdEntity<Long> {
+public class NumericEntity extends AbstractGeneratedIdEntity<Long>
+{
 
 	@Column
 	private Float floatField;
@@ -37,50 +38,50 @@ public class NumericEntity extends AbstractGeneratedIdEntity<Long> {
 	private Long longField;
 
 
-	public Float getFloatField() {
-
+	public Float getFloatField()
+	{
 		return this.floatField;
 	}
 
 
-	public void setFloatField(final Float floatField) {
-
+	public void setFloatField(final Float floatField)
+	{
 		this.floatField = floatField;
 	}
 
 
-	public Double getDoubleField() {
-
+	public Double getDoubleField()
+	{
 		return this.doubleField;
 	}
 
 
-	public void setDoubleField(final Double doubleField) {
-
+	public void setDoubleField(final Double doubleField)
+	{
 		this.doubleField = doubleField;
 	}
 
 
-	public Long getLongField() {
-
+	public Long getLongField()
+	{
 		return this.longField;
 	}
 
 
-	public void setLongField(final Long longField) {
-
+	public void setLongField(final Long longField)
+	{
 		this.longField = longField;
 	}
 
 
-	public Integer getIntField() {
-
+	public Integer getIntField()
+	{
 		return this.intField;
 	}
 
 
-	public void setIntField(final Integer intField) {
-
+	public void setIntField(final Integer intField)
+	{
 		this.intField = intField;
 	}
 

@@ -23,7 +23,8 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.metamodel.SingularAttribute;
 
 
-public class NumericPredicateBuilder<T> implements PredicateBuilder<T> {
+public class NumericPredicateBuilder<T> implements PredicateBuilder<T>
+{
 
 	private final NumericOperator operator;
 
@@ -35,8 +36,8 @@ public class NumericPredicateBuilder<T> implements PredicateBuilder<T> {
 	public NumericPredicateBuilder(
 			final SingularAttribute<? super T, ? extends Number> attribute,
 			final NumericOperator operator,
-			final Number literal) {
-
+			final Number literal)
+	{
 		this.attribute = attribute;
 		this.operator = operator;
 		this.literal = literal;
@@ -44,8 +45,8 @@ public class NumericPredicateBuilder<T> implements PredicateBuilder<T> {
 
 
 	@Override
-	public Predicate createPredicate(final CriteriaBuilder builder, final Path<? extends T> root) {
-
+	public Predicate createPredicate(final CriteriaBuilder builder, final Path<? extends T> root)
+	{
 		switch (this.operator) {
 
 			case EQUALS:

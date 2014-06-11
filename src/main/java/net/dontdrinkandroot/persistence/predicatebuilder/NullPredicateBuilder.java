@@ -23,23 +23,24 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.metamodel.SingularAttribute;
 
 
-public class NullPredicateBuilder<T> implements PredicateBuilder<T> {
+public class NullPredicateBuilder<T> implements PredicateBuilder<T>
+{
 
 	private final boolean isNull;
 
 	private final SingularAttribute<? super T, ?> attribute;
 
 
-	public NullPredicateBuilder(final SingularAttribute<? super T, ?> attribute, final boolean isNull) {
-
+	public NullPredicateBuilder(final SingularAttribute<? super T, ?> attribute, final boolean isNull)
+	{
 		this.attribute = attribute;
 		this.isNull = isNull;
 	}
 
 
 	@Override
-	public Predicate createPredicate(final CriteriaBuilder builder, final Path<? extends T> root) {
-
+	public Predicate createPredicate(final CriteriaBuilder builder, final Path<? extends T> root)
+	{
 		if (this.isNull) {
 			return builder.isNull(root.get(this.attribute));
 		} else {

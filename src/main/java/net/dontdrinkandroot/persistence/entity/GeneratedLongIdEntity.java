@@ -23,7 +23,8 @@ import javax.persistence.MappedSuperclass;
 
 
 @MappedSuperclass
-public class GeneratedLongIdEntity extends AbstractEntity<Long> {
+public class GeneratedLongIdEntity extends AbstractEntity<Long>
+{
 
 	@Id
 	@GeneratedValue
@@ -31,8 +32,8 @@ public class GeneratedLongIdEntity extends AbstractEntity<Long> {
 
 
 	@Override
-	public Long getId() {
-
+	public Long getId()
+	{
 		return this.id;
 	}
 

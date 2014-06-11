@@ -21,39 +21,40 @@ import javax.persistence.Column;
 
 
 @javax.persistence.Entity
-public class ExampleIdEntity extends AbstractIdEntity<Long> {
+public class ExampleIdEntity extends AbstractIdEntity<Long>
+{
 
 	@Column
 	private String text;
 
 
-	public ExampleIdEntity() {
-
+	public ExampleIdEntity()
+	{
 	}
 
 
-	public ExampleIdEntity(final Long id) {
-
+	public ExampleIdEntity(final Long id)
+	{
 		super(id);
 	}
 
 
-	public ExampleIdEntity(final long id, final String text) {
-
+	public ExampleIdEntity(final long id, final String text)
+	{
 		super(id);
 
 		this.text = text;
 	}
 
 
-	public void setText(final String text) {
-
+	public void setText(final String text)
+	{
 		this.text = text;
 	}
 
 
-	public String getText() {
-
+	public String getText()
+	{
 		return this.text;
 	}
 

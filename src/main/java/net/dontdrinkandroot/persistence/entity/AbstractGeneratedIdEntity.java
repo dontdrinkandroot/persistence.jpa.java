@@ -31,7 +31,8 @@ import javax.persistence.MappedSuperclass;
  * @author Philip W. Sorst
  */
 @MappedSuperclass
-public abstract class AbstractGeneratedIdEntity<K> extends AbstractEntity<K> {
+public abstract class AbstractGeneratedIdEntity<K> extends AbstractEntity<K>
+{
 
 	@Id
 	@GeneratedValue
@@ -39,8 +40,8 @@ public abstract class AbstractGeneratedIdEntity<K> extends AbstractEntity<K> {
 
 
 	@Override
-	public K getId() {
-
+	public K getId()
+	{
 		return this.id;
 	}
 

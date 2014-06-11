@@ -44,52 +44,54 @@ import org.springframework.transaction.annotation.Transactional;
  * 
  * @author Philip W. Sorst <philip@sorst.net>
  */
-public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implements TypedDao<E, I> {
+public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implements TypedDao<E, I>
+{
 
 	protected Class<E> entityClass;
 
 
-	public TypedJpaDao(final Class<E> entityClass) {
-
+	public TypedJpaDao(final Class<E> entityClass)
+	{
 		this.entityClass = entityClass;
 	}
 
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY)
-	public void delete(final E entity) {
-
+	public void delete(final E entity)
+	{
 		super.delete(entity, this.entityClass);
 	}
 
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY)
-	public void delete(final I id) {
-
+	public void delete(final I id)
+	{
 		super.delete(id, this.entityClass);
 	}
 
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public E find(final I id) {
-
+	public E find(final I id)
+	{
 		return super.find(id, this.entityClass);
 	}
 
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public long getCount() {
-
+	public long getCount()
+	{
 		return super.getCount(this.entityClass);
 	}
 
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public E load(final I id) {
+	public E load(final I id)
+	{
 
 		return super.load(id, this.entityClass);
 	}
@@ -97,16 +99,16 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public List<E> findAll() {
-
+	public List<E> findAll()
+	{
 		return super.findAll(this.entityClass);
 	}
 
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public List<E> findAll(final SingularAttribute<? super E, ?> attribute, final boolean asc) {
-
+	public List<E> findAll(final SingularAttribute<? super E, ?> attribute, final boolean asc)
+	{
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
 		final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
 		final Root<E> from = criteriaQuery.from(this.entityClass);
@@ -127,8 +129,8 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 			final SingularAttribute<? super E, ?> attribute,
 			final boolean asc,
 			final int firstResult,
-			final int maxResults) {
-
+			final int maxResults)
+	{
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
 		final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
 		final Root<E> from = criteriaQuery.from(this.entityClass);
@@ -147,8 +149,8 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public List<E> findAll(final PredicateBuilder<E> filter) {
-
+	public List<E> findAll(final PredicateBuilder<E> filter)
+	{
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
 		final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
 		final Root<E> from = criteriaQuery.from(this.entityClass);
@@ -161,8 +163,8 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public List<E> findAll(final Collection<PredicateBuilder<E>> filters) {
-
+	public List<E> findAll(final Collection<PredicateBuilder<E>> filters)
+	{
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
 		final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
 		final Root<E> from = criteriaQuery.from(this.entityClass);
@@ -182,8 +184,8 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public List<E> findAll(final PredicateBuilder<E>... filters) {
-
+	public List<E> findAll(final PredicateBuilder<E>... filters)
+	{
 		final CriteriaBuilder builder = this.getCriteriaBuilder();
 		final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
 		final Root<E> from = criteriaQuery.from(this.entityClass);

@@ -21,16 +21,16 @@ import java.io.Serializable;
 
 
 /**
- * Represents an entity with a primary key. The methods getId() must be implemented, even if the
- * primary key has a different field name, also make sure that the primary key implements
- * equals/hashcode correctly.
+ * Represents an entity with a primary key. The methods getId() must be implemented, even if the primary key has a
+ * different field name, also make sure that the primary key implements equals/hashcode correctly.
  * 
  * @param <K>
  *            Type of the primary key.
  * 
  * @author Philip W. Sorst <philip@sorst.net>
  */
-public interface Entity<K> extends Serializable {
+public interface Entity<K> extends Serializable
+{
 
 	/**
 	 * Get the primary key of the entity.

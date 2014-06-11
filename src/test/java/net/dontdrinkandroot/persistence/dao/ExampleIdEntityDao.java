@@ -20,6 +20,7 @@ package net.dontdrinkandroot.persistence.dao;
 import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
 
 
-public interface ExampleIdEntityDao extends TypedDao<ExampleIdEntity, Long> {
+public interface ExampleIdEntityDao extends TypedDao<ExampleIdEntity, Long>
+{
 
 }

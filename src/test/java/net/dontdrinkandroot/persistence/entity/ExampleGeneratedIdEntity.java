@@ -32,7 +32,8 @@ import org.hibernate.annotations.FetchMode;
 
 
 @javax.persistence.Entity
-public class ExampleGeneratedIdEntity extends GeneratedLongIdEntity {
+public class ExampleGeneratedIdEntity extends GeneratedLongIdEntity
+{
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@Fetch(FetchMode.JOIN)
@@ -46,44 +47,44 @@ public class ExampleGeneratedIdEntity extends GeneratedLongIdEntity {
 	private Integer numericValue;
 
 
-	public ExampleGeneratedIdEntity() {
-
+	public ExampleGeneratedIdEntity()
+	{
 	}
 
 
-	public void setOtherEntities(final List<ExampleIdEntity> otherEntities) {
-
+	public void setOtherEntities(final List<ExampleIdEntity> otherEntities)
+	{
 		this.otherEntities = otherEntities;
 	}
 
 
-	public List<ExampleIdEntity> getOtherEntities() {
-
+	public List<ExampleIdEntity> getOtherEntities()
+	{
 		return this.otherEntities;
 	}
 
 
-	public ExampleEnum getExampleEnum() {
-
+	public ExampleEnum getExampleEnum()
+	{
 		return this.exampleEnum;
 	}
 
 
-	public ExampleGeneratedIdEntity setExampleEnum(final ExampleEnum exampleEnum) {
-
+	public ExampleGeneratedIdEntity setExampleEnum(final ExampleEnum exampleEnum)
+	{
 		this.exampleEnum = exampleEnum;
 		return this;
 	}
 
 
-	public Integer getNumericValue() {
-
+	public Integer getNumericValue()
+	{
 		return this.numericValue;
 	}
 
 
-	public ExampleGeneratedIdEntity setNumericValue(final Integer numericValue) {
-
+	public ExampleGeneratedIdEntity setNumericValue(final Integer numericValue)
+	{
 		this.numericValue = numericValue;
 		return this;
 	}
