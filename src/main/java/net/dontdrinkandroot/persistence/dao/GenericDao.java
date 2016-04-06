@@ -24,49 +24,57 @@ import net.dontdrinkandroot.persistence.entity.Entity;
 
 /**
  * General contract of a Data Access Object that manages {@link Entity} instances.
- * 
+ *
  * @author Philip W. Sorst <philip@sorst.net>
  */
 public interface GenericDao
 {
 
 	/**
+	 * Adds the given entity to the persistence context and performs a flush.
+	 *
+	 * @return The saved instance of the entity.
+	 */
+	<E extends Entity<K>, K> E persist(E entity);
+
+	/**
+	 * Adds the given entity to the persistence context.
+	 *
+	 * @return The saved instance of the entity.
+	 */
+	<E extends Entity<K>, K> E persist(E entity, boolean flush);
+
+	/**
 	 * Saves the given entity.
-	 * 
+	 *
 	 * @return The saved instance of the entity.
 	 */
 	<E extends Entity<K>, K> E save(E entity);
-
 
 	/**
 	 * Deletes the given entity of the given class.
 	 */
 	<E extends Entity<K>, K> void delete(final E entity, final Class<E> clazz);
 
-
 	/**
 	 * Deletes the entity with the given id of the given class.
 	 */
 	<E extends Entity<K>, K> void delete(final K id, final Class<E> clazz);
-
 
 	/**
 	 * Finds the entity with the given id of the given class.
 	 */
 	<E extends Entity<K>, K> E find(final K id, final Class<E> clazz);
 
-
 	/**
 	 * Finds all entities of the given class.
 	 */
 	<E extends Entity<K>, K> List<E> findAll(final Class<E> clazz);
 
-
 	/**
 	 * Loads the entity with the given id of the given class or throws an Exception if it was not found.
 	 */
 	<E extends Entity<K>, K> E load(final K id, final Class<E> clazz);
-
 
 	/**
 	 * Counts the entities of the given class.

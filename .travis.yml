@@ -1,0 +1,12 @@
+language: java
+
+jdk:
+- openjdk7
+
+env:
+  global:
+  - NEXUS_USERNAME=travis
+  - secure: V5EK5xgOI/NzfyefqZtR5SUWZYi627fmuF9Qar32IiiX+jNa4xkp30J2ZXqIhV4ff9/KlDu1IdovuXCDGwf46fEKQwWJHajDqbztqdKObcKcKecqlO01DYyAey+l+yy2eOB0bbS1spK82LczpJDPBgXYx6AJDkPrtJmnwLU00PY=
+
+after_success:
+  - "[ $TRAVIS_JDK_VERSION == \"openjdk7\" ] && { mvn clean deploy --settings travis-maven-settings.xml; };"
