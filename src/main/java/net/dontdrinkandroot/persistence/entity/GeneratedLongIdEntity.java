@@ -18,6 +18,7 @@
 package net.dontdrinkandroot.persistence.entity;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -27,7 +28,7 @@ public class GeneratedLongIdEntity extends AbstractEntity<Long>
 {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 

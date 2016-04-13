@@ -24,10 +24,10 @@ import javax.persistence.MappedSuperclass;
 
 /**
  * {@link AbstractEntity} that has a primary key which is automatically generated.
- * 
+ *
  * @param <K>
  *            Type of the primary key.
- * 
+ *
  * @author Philip W. Sorst
  */
 @MappedSuperclass
