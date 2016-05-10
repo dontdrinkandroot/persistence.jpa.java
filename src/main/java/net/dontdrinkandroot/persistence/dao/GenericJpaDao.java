@@ -155,7 +155,17 @@ public class GenericJpaDao implements GenericDao
 	@Transactional(propagation = Propagation.MANDATORY)
 	public <E extends Entity<K>, K> E save(final E entity)
 	{
+		return this.save(entity, false);
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.MANDATORY)
+	public <E extends Entity<K>, K> E save(final E entity, boolean flush)
+	{
 		final E mergedEntity = this.getEntityManager().merge(entity);
+		if (flush) {
+			this.getEntityManager().flush();
+		}
 
 		return mergedEntity;
 	}

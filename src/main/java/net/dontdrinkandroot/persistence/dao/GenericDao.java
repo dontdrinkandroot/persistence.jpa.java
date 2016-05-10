@@ -52,6 +52,15 @@ public interface GenericDao
 	<E extends Entity<K>, K> E save(E entity);
 
 	/**
+	 * Saves the given entity.
+	 *
+	 * @param flush
+	 *            Whether to flush after saving.
+	 * @return The saved instance of the entity.
+	 */
+	<E extends Entity<K>, K> E save(E entity, boolean flush);
+
+	/**
 	 * Deletes the given entity of the given class.
 	 */
 	<E extends Entity<K>, K> void delete(final E entity, final Class<E> clazz);
