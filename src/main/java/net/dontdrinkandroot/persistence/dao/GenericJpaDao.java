@@ -248,8 +248,18 @@ public class GenericJpaDao implements GenericDao
 	 */
 	protected <V> V findSingleOrNull(final CriteriaQuery<V> criteriaQuery)
 	{
+		return this.findSingleOrNull(this.getEntityManager().createQuery(criteriaQuery));
+	}
+
+	/**
+	 * Finds a single entity by the given {@link Query}, throws an Exception if there is more than one result.
+	 *
+	 * @return The found entity or null if there was none found.
+	 */
+	protected <V> V findSingleOrNull(final TypedQuery<V> query)
+	{
 		try {
-			return this.getEntityManager().createQuery(criteriaQuery).getSingleResult();
+			return query.getSingleResult();
 		} catch (final NoResultException e) {
 			return null;
 		}
