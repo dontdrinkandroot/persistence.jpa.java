@@ -20,11 +20,6 @@ package net.dontdrinkandroot.persistence.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.dontdrinkandroot.persistence.ExampleEnum;
-import net.dontdrinkandroot.persistence.entity.ExampleGeneratedIdEntity;
-import net.dontdrinkandroot.persistence.entity.ExampleGeneratedIdEntity_;
-import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +28,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+
+import net.dontdrinkandroot.persistence.ExampleEnum;
+import net.dontdrinkandroot.persistence.entity.ExampleGeneratedIdEntity;
+import net.dontdrinkandroot.persistence.entity.ExampleGeneratedIdEntity_;
+import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -56,12 +56,15 @@ public class DaosTest
 
 		final ExampleIdEntity ex1 = new ExampleIdEntity(1L);
 		this.entityDao.save(ex1);
-		Assert.assertEquals(ex1, this.entityDao.find(1L));
+		Assert.assertEquals(ex1, this.entityDao.load(1L));
 
 		final ExampleIdEntity ex2 = new ExampleIdEntity(2L);
 		this.entityDao.save(ex2);
 		Assert.assertEquals(ex2, this.entityDao.find(2L));
 
+		Assert.assertEquals(2, this.entityDao.findAll().size());
+
+		this.entityDao.delete((ExampleIdEntity) null);
 		Assert.assertEquals(2, this.entityDao.findAll().size());
 
 		this.entityDao.delete(ex2);
@@ -75,6 +78,38 @@ public class DaosTest
 		Assert.assertEquals(0, this.entityDao.findAll().size());
 	}
 
+	@Test
+	@Transactional
+	public void testDeleteById()
+	{
+		Assert.assertEquals(0, this.entityDao.findAll().size());
+
+		final ExampleIdEntity ex1 = new ExampleIdEntity(1L);
+		this.entityDao.save(ex1);
+		Assert.assertEquals(ex1, this.entityDao.find(1L));
+
+		final ExampleIdEntity ex2 = new ExampleIdEntity(2L);
+		this.entityDao.save(ex2);
+		Assert.assertEquals(ex2, this.entityDao.find(2L));
+
+		Assert.assertEquals(2, this.entityDao.findAll().size());
+
+		this.entityDao.delete((Long) null);
+		Assert.assertEquals(2, this.entityDao.findAll().size());
+
+		this.entityDao.delete(3L);
+		Assert.assertEquals(2, this.entityDao.findAll().size());
+
+		this.entityDao.delete(2L);
+		Assert.assertNull(this.entityDao.find(2L));
+		Assert.assertEquals(ex1, this.entityDao.find(1L));
+		Assert.assertEquals(1, this.entityDao.findAll().size());
+
+		this.entityDao.delete(1L);
+		Assert.assertNull(this.entityDao.find(1L));
+		Assert.assertNull(this.entityDao.find(2L));
+		Assert.assertEquals(0, this.entityDao.findAll().size());
+	}
 
 	@Test
 	@Transactional
@@ -103,7 +138,6 @@ public class DaosTest
 		Assert.assertEquals(0, this.generatedIdEntityDao.findAll().size());
 	}
 
-
 	@Test
 	@Transactional
 	public void testGetCount()
@@ -117,7 +151,6 @@ public class DaosTest
 		Assert.assertEquals(3, this.generatedIdEntityDao.getCount());
 	}
 
-
 	@Test
 	@Transactional
 	public void testFindMaxEnum()
@@ -129,7 +162,6 @@ public class DaosTest
 
 		Assert.assertEquals(ExampleEnum.SECOND, this.generatedIdEntityDao.findMaxEnum());
 	}
-
 
 	@Test
 	@Transactional
@@ -157,7 +189,6 @@ public class DaosTest
 		Assert.assertEquals(ex2, result.get(0));
 		Assert.assertEquals(ex4, result.get(1));
 	}
-
 
 	@Test
 	@Transactional

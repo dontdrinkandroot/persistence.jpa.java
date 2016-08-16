@@ -252,7 +252,7 @@ public class GenericJpaDao implements GenericDao
 	}
 
 	/**
-	 * Finds a single entity by the given {@link Query}, throws an Exception if there is more than one result.
+	 * Finds a single entity by the given {@link TypedQuery}, throws an Exception if there is more than one result.
 	 *
 	 * @return The found entity or null if there was none found.
 	 */
