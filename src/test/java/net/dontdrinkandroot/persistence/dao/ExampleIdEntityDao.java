@@ -22,5 +22,4 @@ import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
 
 public interface ExampleIdEntityDao extends TypedDao<ExampleIdEntity, Long>
 {
-
 }

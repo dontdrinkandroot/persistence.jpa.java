@@ -39,7 +39,7 @@ import net.dontdrinkandroot.persistence.entity.Entity;
 /**
  * Base implementation of a {@link GenericDao} that uses a JPA {@link EntityManager}.
  *
- * @author Philip W. Sorst <philip@sorst.net>
+ * @author Philip Washington Sorst <philip@sorst.net>
  */
 public class GenericJpaDao implements GenericDao
 {
@@ -183,6 +183,12 @@ public class GenericJpaDao implements GenericDao
 		criteriaQuery.select(count);
 
 		return this.findSingle(criteriaQuery).longValue();
+	}
+
+	@Override
+	public void flush()
+	{
+		this.entityManager.flush();
 	}
 
 	/**

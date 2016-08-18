@@ -28,16 +28,15 @@ public class ExampleIdEntity extends AbstractIdEntity<Long>
 	private String text;
 
 
-	public ExampleIdEntity()
+	protected ExampleIdEntity()
 	{
+		/* Reflection instantiation */
 	}
-
 
 	public ExampleIdEntity(final Long id)
 	{
 		super(id);
 	}
-
 
 	public ExampleIdEntity(final long id, final String text)
 	{
@@ -46,16 +45,13 @@ public class ExampleIdEntity extends AbstractIdEntity<Long>
 		this.text = text;
 	}
 
-
 	public void setText(final String text)
 	{
 		this.text = text;
 	}
 
-
 	public String getText()
 	{
 		return this.text;
 	}
-
 }

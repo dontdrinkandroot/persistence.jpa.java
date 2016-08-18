@@ -90,4 +90,8 @@ public interface GenericDao
 	 */
 	<E extends Entity<K>, K> long getCount(final Class<E> clazz);
 
+	/**
+	 * Synchronize the persistence context to the underlying database.
+	 */
+	void flush();
 }
