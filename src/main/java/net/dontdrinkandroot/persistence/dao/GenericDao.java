@@ -25,7 +25,7 @@ import net.dontdrinkandroot.persistence.entity.Entity;
 /**
  * General contract of a Data Access Object that manages {@link Entity} instances.
  *
- * @author Philip W. Sorst <philip@sorst.net>
+ * @author Philip Washington Sorst <philip@sorst.net>
  */
 public interface GenericDao
 {

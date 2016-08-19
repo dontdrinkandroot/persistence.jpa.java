@@ -26,11 +26,11 @@ import net.dontdrinkandroot.persistence.entity.Entity;
 
 /**
  * A PredicateBuillder is an abstraction to generate a {@link Predicate} for an {@link Entity}.
- * 
+ *
  * @param <E>
  *            Type of the {@link Entity} to build the {@link Predicate} for.
- * 
- * @author Philip W. Sorst <philip@sorst.net>
+ *
+ * @author Philip Washington Sorst <philip@sorst.net>
  */
 public interface PredicateBuilder<E>
 {

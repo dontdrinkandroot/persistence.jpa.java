@@ -21,6 +21,9 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 @MappedSuperclass
 public class LongIdEntity extends AbstractEntity<Long>
 {
@@ -33,12 +36,10 @@ public class LongIdEntity extends AbstractEntity<Long>
 	{
 	}
 
-
 	public LongIdEntity(final Long id)
 	{
 		this.id = id;
 	}
-
 
 	@Override
 	public Long getId()

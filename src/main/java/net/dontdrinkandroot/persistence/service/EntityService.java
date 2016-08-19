@@ -8,6 +8,9 @@ import net.dontdrinkandroot.persistence.entity.Entity;
 import net.dontdrinkandroot.persistence.pagination.PaginatedResult;
 
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 public interface EntityService<E extends Entity<I>, I>
 {
 

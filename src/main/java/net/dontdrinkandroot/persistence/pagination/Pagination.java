@@ -3,6 +3,9 @@ package net.dontdrinkandroot.persistence.pagination;
 import java.io.Serializable;
 
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 public class Pagination implements Serializable
 {
 

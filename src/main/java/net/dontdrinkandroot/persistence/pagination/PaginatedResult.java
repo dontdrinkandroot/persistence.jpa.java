@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 public class PaginatedResult<T> implements Serializable
 {
 

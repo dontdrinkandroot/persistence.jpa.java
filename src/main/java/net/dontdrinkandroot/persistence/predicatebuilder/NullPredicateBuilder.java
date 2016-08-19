@@ -23,6 +23,9 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.metamodel.SingularAttribute;
 
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 public class NullPredicateBuilder<T> implements PredicateBuilder<T>
 {
 
@@ -36,7 +39,6 @@ public class NullPredicateBuilder<T> implements PredicateBuilder<T>
 		this.attribute = attribute;
 		this.isNull = isNull;
 	}
-
 
 	@Override
 	public Predicate createPredicate(final CriteriaBuilder builder, final Path<? extends T> root)

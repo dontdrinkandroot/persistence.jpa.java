@@ -34,7 +34,7 @@ import net.dontdrinkandroot.persistence.predicatebuilder.PredicateBuilder;
  * @param <K>
  *            Type of the {@link Entity}'s primary id.
  *
- * @author Philip W. Sorst <philip@sorst.net>
+ * @author Philip Washington Sorst <philip@sorst.net>
  */
 public interface TypedDao<E extends Entity<K>, K> extends GenericDao
 {

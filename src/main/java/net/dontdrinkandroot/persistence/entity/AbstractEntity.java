@@ -25,11 +25,11 @@ import javax.persistence.MappedSuperclass;
  * different field name, also make sure that the primary key implements equals/hashcode correctly. hashCode() and
  * equals() are based on the id, so make sure not to use id in any context where these methods are important while no id
  * is set (e.g. in HashMaps) or you must override them.
- * 
+ *
  * @param <K>
  *            Type of the primary key.
- * 
- * @author Philip W. Sorst
+ *
+ * @author Philip Washington Sorst <philip@sorst.net>
  */
 @MappedSuperclass
 public abstract class AbstractEntity<K> implements Entity<K>
@@ -43,13 +43,11 @@ public abstract class AbstractEntity<K> implements Entity<K>
 		/* Noop */
 	}
 
-
 	@Override
 	public String toString()
 	{
 		return this.getClass().getSimpleName() + "[id=" + this.getId() + "]";
 	}
-
 
 	@Override
 	public int hashCode()
@@ -60,7 +58,6 @@ public abstract class AbstractEntity<K> implements Entity<K>
 		result = prime * result + (this.getId() == null ? 0 : this.getId().hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(final Object obj)

@@ -28,7 +28,7 @@ import javax.persistence.MappedSuperclass;
  * @param <K>
  *            Type of the primary key.
  *
- * @author Philip W. Sorst
+ * @author Philip Washington Sorst <philip@sorst.net>
  */
 @MappedSuperclass
 public abstract class AbstractGeneratedIdEntity<K> extends AbstractEntity<K>

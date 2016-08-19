@@ -42,7 +42,7 @@ import net.dontdrinkandroot.persistence.predicatebuilder.PredicateBuilder;
  * @param <I>
  *            Type of the {@link Entity}'s id.
  *
- * @author Philip W. Sorst <philip@sorst.net>
+ * @author Philip Washington Sorst <philip@sorst.net>
  */
 public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implements TypedDao<E, I>
 {
@@ -189,5 +189,4 @@ public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implement
 
 		return this.find(criteriaQuery);
 	}
-
 }

@@ -23,6 +23,9 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 @MappedSuperclass
 public class GeneratedLongIdEntity extends AbstractEntity<Long>
 {

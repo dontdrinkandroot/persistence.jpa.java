@@ -23,11 +23,11 @@ import javax.persistence.MappedSuperclass;
 
 /**
  * {@link AbstractEntity} that has a primary key which needs to be assigned manually.
- * 
+ *
  * @param <K>
  *            Type of the primary key.
- * 
- * @author Philip W. Sorst
+ *
+ * @author Philip Washington Sorst <philip@sorst.net>
  */
 @MappedSuperclass
 public abstract class AbstractIdEntity<K> extends AbstractEntity<K>
@@ -41,12 +41,10 @@ public abstract class AbstractIdEntity<K> extends AbstractEntity<K>
 	{
 	}
 
-
 	public AbstractIdEntity(final K id)
 	{
 		this.id = id;
 	}
-
 
 	@Override
 	public K getId()

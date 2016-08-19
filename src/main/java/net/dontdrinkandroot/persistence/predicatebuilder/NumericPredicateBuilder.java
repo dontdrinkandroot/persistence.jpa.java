@@ -23,6 +23,9 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.metamodel.SingularAttribute;
 
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 public class NumericPredicateBuilder<T> implements PredicateBuilder<T>
 {
 
@@ -42,7 +45,6 @@ public class NumericPredicateBuilder<T> implements PredicateBuilder<T>
 		this.operator = operator;
 		this.literal = literal;
 	}
-
 
 	@Override
 	public Predicate createPredicate(final CriteriaBuilder builder, final Path<? extends T> root)

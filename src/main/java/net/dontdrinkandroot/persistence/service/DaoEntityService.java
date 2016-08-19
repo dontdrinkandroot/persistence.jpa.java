@@ -12,6 +12,9 @@ import net.dontdrinkandroot.persistence.pagination.PaginatedResult;
 import net.dontdrinkandroot.persistence.pagination.Pagination;
 
 
+/**
+ * @author Philip Washington Sorst <philip@sorst.net>
+ */
 public class DaoEntityService<E extends Entity<I>, I> implements EntityService<E, I>
 {
 
