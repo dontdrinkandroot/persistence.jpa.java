@@ -29,4 +29,5 @@ public abstract class ExampleIdEntity_ extends net.dontdrinkandroot.persistence.
 
 	public static volatile SingularAttribute<ExampleIdEntity, String> text;
 
+	public static volatile SingularAttribute<ExampleIdEntity, Long> number;
 }

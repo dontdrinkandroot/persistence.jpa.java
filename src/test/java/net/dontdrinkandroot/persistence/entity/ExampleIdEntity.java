@@ -27,6 +27,9 @@ public class ExampleIdEntity extends AbstractIdEntity<Long>
 	@Column
 	private String text;
 
+	@Column
+	private Long number;
+
 
 	protected ExampleIdEntity()
 	{
@@ -53,5 +56,15 @@ public class ExampleIdEntity extends AbstractIdEntity<Long>
 	public String getText()
 	{
 		return this.text;
+	}
+
+	public Long getNumber()
+	{
+		return this.number;
+	}
+
+	public void setNumber(Long number)
+	{
+		this.number = number;
 	}
 }

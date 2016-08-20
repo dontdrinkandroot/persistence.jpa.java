@@ -1,5 +1,6 @@
 package net.dontdrinkandroot.persistence.dao;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -16,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
 import net.dontdrinkandroot.persistence.entity.ExampleIdEntity_;
+import net.dontdrinkandroot.persistence.predicatebuilder.NumericOperator;
+import net.dontdrinkandroot.persistence.predicatebuilder.NumericPredicateBuilder;
 
 
 /**
@@ -56,10 +59,26 @@ public class TypedJpaDaoTest
 		Assert.assertEquals("9", entities.get(10).getText());
 	}
 
+	@Test
+	@Transactional(transactionManager = "transactionManager")
+	public void findAllWithPredicateCollection()
+	{
+		this.populateDatabase();
+
+		List<ExampleIdEntity> entities = this.dao.findAll(
+				Collections.singletonList(
+						new NumericPredicateBuilder<ExampleIdEntity>(
+								ExampleIdEntity_.number,
+								NumericOperator.GREATER_THAN,
+								10)));
+		Assert.assertEquals(89, entities.size());
+	}
+
 	private void populateDatabase()
 	{
 		for (long i = 0; i < 100; i++) {
 			ExampleIdEntity entity = new ExampleIdEntity(i, Long.toString(i));
+			entity.setNumber(i);
 			this.dao.save(entity, false);
 		}
 		this.dao.flush();
