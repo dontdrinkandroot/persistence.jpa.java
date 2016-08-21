@@ -51,5 +51,4 @@ public abstract class AbstractIdEntity<K> extends AbstractEntity<K>
 	{
 		return this.id;
 	}
-
 }
