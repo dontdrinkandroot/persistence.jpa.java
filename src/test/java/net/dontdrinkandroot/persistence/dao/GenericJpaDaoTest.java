@@ -3,6 +3,9 @@ package net.dontdrinkandroot.persistence.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
+import net.dontdrinkandroot.persistence.entity.ExampleIdEntity_;
 
 
 /**
@@ -77,6 +81,25 @@ public class GenericJpaDaoTest
 		Assert.assertEquals(1, this.dao.getCount(ExampleIdEntity.class));
 		this.dao.delete(new Long(2L), ExampleIdEntity.class);
 		Assert.assertEquals(0, this.dao.getCount(ExampleIdEntity.class));
+	}
+
+	@Test
+	@Transactional(transactionManager = "transactionManager")
+	public void testFindSingleOrNull()
+	{
+		this.populateDatabase();
+
+		CriteriaBuilder criteriaBuilder = this.dao.getCriteriaBuilder();
+
+		CriteriaQuery<ExampleIdEntity> query = criteriaBuilder.createQuery(ExampleIdEntity.class);
+		Root<ExampleIdEntity> root = query.from(ExampleIdEntity.class);
+		query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.id), 1L));
+		Assert.assertEquals(new Long(1L), this.dao.findSingleOrNull(query).getId());
+
+		query = criteriaBuilder.createQuery(ExampleIdEntity.class);
+		root = query.from(ExampleIdEntity.class);
+		query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.id), 120L));
+		Assert.assertNull(this.dao.findSingleOrNull(query));
 	}
 
 	private void populateDatabase()
