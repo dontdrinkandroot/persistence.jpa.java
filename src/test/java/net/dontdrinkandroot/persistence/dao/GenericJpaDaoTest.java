@@ -2,6 +2,7 @@ package net.dontdrinkandroot.persistence.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -100,12 +101,23 @@ public class GenericJpaDaoTest
 		root = query.from(ExampleIdEntity.class);
 		query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.id), 120L));
 		Assert.assertNull(this.dao.findSingleOrNull(query));
+
+		try {
+			query = criteriaBuilder.createQuery(ExampleIdEntity.class);
+			root = query.from(ExampleIdEntity.class);
+			query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.text), "red"));
+			this.dao.findSingleOrNull(query);
+			Assert.fail("NonUniqueResultException expected");
+		} catch (NonUniqueResultException e) {
+			/* Expected */
+		}
 	}
 
 	private void populateDatabase()
 	{
+		String[] texts = new String[] { "red", "green", "blue" };
 		for (long i = 0; i < 100; i++) {
-			ExampleIdEntity entity = new ExampleIdEntity(i, Long.toString(i));
+			ExampleIdEntity entity = new ExampleIdEntity(i, texts[(int) (i % 3)]);
 			this.dao.save(entity, false);
 		}
 		this.dao.flush();

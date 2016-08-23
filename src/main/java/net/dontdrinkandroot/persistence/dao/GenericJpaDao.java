@@ -287,5 +287,4 @@ public class GenericJpaDao implements GenericDao
 
 		return results.iterator().next();
 	}
-
 }
