@@ -113,6 +113,28 @@ public class GenericJpaDaoTest
 		}
 	}
 
+	@Test
+	@Transactional(transactionManager = "transactionManager")
+	public void testFindFirstOrNull()
+	{
+		this.populateDatabase();
+
+		CriteriaBuilder criteriaBuilder = this.dao.getCriteriaBuilder();
+
+		CriteriaQuery<ExampleIdEntity> query;
+		Root<ExampleIdEntity> root;
+
+		query = criteriaBuilder.createQuery(ExampleIdEntity.class);
+		root = query.from(ExampleIdEntity.class);
+		query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.id), 120L));
+		Assert.assertNull(this.dao.findFirstOrNull(query));
+
+		query = criteriaBuilder.createQuery(ExampleIdEntity.class);
+		root = query.from(ExampleIdEntity.class);
+		query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.text), "red"));
+		Assert.assertEquals(new Long(0L), this.dao.findFirstOrNull(query).getId());
+	}
+
 	private void populateDatabase()
 	{
 		String[] texts = new String[] { "red", "green", "blue" };
