@@ -36,5 +36,4 @@ public interface Entity<K> extends Serializable
 	 * Get the primary key of the entity.
 	 */
 	K getId();
-
 }
