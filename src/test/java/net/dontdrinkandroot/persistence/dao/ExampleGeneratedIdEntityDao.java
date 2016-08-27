@@ -23,7 +23,7 @@ import net.dontdrinkandroot.persistence.ExampleEnum;
 import net.dontdrinkandroot.persistence.entity.ExampleGeneratedIdEntity;
 
 
-public interface ExampleGeneratedIdEntityDao extends TypedDao<ExampleGeneratedIdEntity, Long>
+public interface ExampleGeneratedIdEntityDao extends EntityDao<ExampleGeneratedIdEntity, Long>
 {
 
 	List<ExampleGeneratedIdEntity> findByOtherText(String text);

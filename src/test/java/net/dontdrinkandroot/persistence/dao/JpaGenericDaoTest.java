@@ -46,26 +46,26 @@ import net.dontdrinkandroot.persistence.entity.ExampleIdEntity_;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:database.xml" })
 @Rollback
-public class GenericJpaDaoTest
+public class JpaGenericDaoTest
 {
 
 	@PersistenceContext
 	EntityManager entityManager;
 
-	private GenericJpaDao dao;
+	private JpaGenericDao dao;
 
 
 	@Before
 	public void beforeMethod()
 	{
-		this.dao = new GenericJpaDao();
+		this.dao = new JpaGenericDao();
 		this.dao.setEntityManager(this.entityManager);
 	}
 
 	@Test
 	public void testLogger()
 	{
-		Logger logger = LoggerFactory.getLogger(GenericJpaDaoTest.class);
+		Logger logger = LoggerFactory.getLogger(JpaGenericDaoTest.class);
 		this.dao.setLogger(logger);
 		Assert.assertEquals(logger, this.dao.getLogger());
 	}

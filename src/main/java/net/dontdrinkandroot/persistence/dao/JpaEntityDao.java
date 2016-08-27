@@ -35,7 +35,7 @@ import net.dontdrinkandroot.persistence.predicatebuilder.PredicateBuilder;
 
 
 /**
- * Base implementation of a {@link TypedDao} that uses a JPA {@link EntityManager}.
+ * Base implementation of a {@link EntityDao} that uses a JPA {@link EntityManager}.
  *
  * @param <E>
  *            Type of the {@link Entity}.
@@ -44,13 +44,13 @@ import net.dontdrinkandroot.persistence.predicatebuilder.PredicateBuilder;
  *
  * @author Philip Washington Sorst <philip@sorst.net>
  */
-public class TypedJpaDao<E extends Entity<I>, I> extends GenericJpaDao implements TypedDao<E, I>
+public class JpaEntityDao<E extends Entity<I>, I> extends JpaGenericDao implements EntityDao<E, I>
 {
 
 	protected Class<E> entityClass;
 
 
-	public TypedJpaDao(final Class<E> entityClass)
+	public JpaEntityDao(final Class<E> entityClass)
 	{
 		this.entityClass = entityClass;
 	}

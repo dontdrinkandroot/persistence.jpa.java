@@ -37,7 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:database.xml" })
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
-public class NumericEntityDaoTest extends TypedJpaDao<NumericEntity, Long>
+public class NumericEntityDaoTest extends JpaEntityDao<NumericEntity, Long>
 {
 
 	public NumericEntityDaoTest()

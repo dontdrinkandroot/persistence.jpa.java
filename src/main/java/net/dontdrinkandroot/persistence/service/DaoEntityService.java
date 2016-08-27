@@ -23,7 +23,7 @@ import javax.persistence.metamodel.SingularAttribute;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import net.dontdrinkandroot.persistence.dao.TypedDao;
+import net.dontdrinkandroot.persistence.dao.EntityDao;
 import net.dontdrinkandroot.persistence.entity.Entity;
 import net.dontdrinkandroot.persistence.pagination.PaginatedResult;
 import net.dontdrinkandroot.persistence.pagination.Pagination;
@@ -35,7 +35,7 @@ import net.dontdrinkandroot.persistence.pagination.Pagination;
 public class DaoEntityService<E extends Entity<I>, I> implements EntityService<E, I>
 {
 
-	private TypedDao<E, I> dao;
+	private EntityDao<E, I> dao;
 
 
 	protected DaoEntityService()
@@ -43,7 +43,7 @@ public class DaoEntityService<E extends Entity<I>, I> implements EntityService<E
 		/* Reflection instantiation */
 	}
 
-	public DaoEntityService(TypedDao<E, I> dao)
+	public DaoEntityService(EntityDao<E, I> dao)
 	{
 		this.dao = dao;
 	}
@@ -120,7 +120,7 @@ public class DaoEntityService<E extends Entity<I>, I> implements EntityService<E
 		this.getDao().delete(entity);
 	}
 
-	protected TypedDao<E, I> getDao()
+	protected EntityDao<E, I> getDao()
 	{
 		return this.dao;
 	};

@@ -36,7 +36,7 @@ import net.dontdrinkandroot.persistence.predicatebuilder.PredicateBuilder;
  *
  * @author Philip Washington Sorst <philip@sorst.net>
  */
-public interface TypedDao<E extends Entity<K>, K> extends GenericDao
+public interface EntityDao<E extends Entity<K>, K> extends GenericDao
 {
 
 	/**

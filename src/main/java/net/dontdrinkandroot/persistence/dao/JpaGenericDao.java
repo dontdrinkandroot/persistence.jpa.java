@@ -41,7 +41,7 @@ import net.dontdrinkandroot.persistence.entity.Entity;
  *
  * @author Philip Washington Sorst <philip@sorst.net>
  */
-public class GenericJpaDao implements GenericDao
+public class JpaGenericDao implements GenericDao
 {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());

@@ -44,19 +44,19 @@ import net.dontdrinkandroot.persistence.predicatebuilder.NumericPredicateBuilder
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:database.xml" })
 @Rollback
-public class TypedJpaDaoTest
+public class JpaEntityDaoTest
 {
 
 	@PersistenceContext
 	EntityManager entityManager;
 
-	private TypedJpaDao<ExampleIdEntity, Long> dao;
+	private JpaEntityDao<ExampleIdEntity, Long> dao;
 
 
 	@Before
 	public void beforeMethod()
 	{
-		this.dao = new TypedJpaDao<ExampleIdEntity, Long>(ExampleIdEntity.class);
+		this.dao = new JpaEntityDao<ExampleIdEntity, Long>(ExampleIdEntity.class);
 		this.dao.setEntityManager(this.entityManager);
 	}
 

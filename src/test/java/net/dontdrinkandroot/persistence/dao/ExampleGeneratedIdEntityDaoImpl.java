@@ -33,7 +33,7 @@ import net.dontdrinkandroot.persistence.entity.ExampleIdEntity_;
 import org.springframework.transaction.annotation.Transactional;
 
 
-public class ExampleGeneratedIdEntityDaoImpl extends TypedJpaDao<ExampleGeneratedIdEntity, Long>
+public class ExampleGeneratedIdEntityDaoImpl extends JpaEntityDao<ExampleGeneratedIdEntity, Long>
 		implements ExampleGeneratedIdEntityDao
 {
 
