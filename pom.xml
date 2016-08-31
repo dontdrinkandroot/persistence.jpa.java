@@ -28,11 +28,11 @@
 	</scm>
 
 	<properties>
-		<version.org.springframework>4.2.5.RELEASE</version.org.springframework>
+		<version.org.springframework>4.3.2.RELEASE</version.org.springframework>
 		<version.cglib>3.2.1</version.cglib>
 		<version.org.hsqldb>2.3.3</version.org.hsqldb>
 		<version.org.apache.commons.dbcp2>2.1.1</version.org.apache.commons.dbcp2>
-		<version.org.hibernate>5.1.0.Final</version.org.hibernate>
+		<version.org.hibernate>5.2.2.Final</version.org.hibernate>
 	</properties>
 
 	<dependencies>
