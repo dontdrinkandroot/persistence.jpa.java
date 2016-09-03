@@ -2,13 +2,13 @@
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,26 +17,25 @@
  */
 package net.dontdrinkandroot.persistence.service;
 
-import java.util.List;
-
-import javax.persistence.metamodel.SingularAttribute;
-
-import org.springframework.transaction.annotation.Transactional;
-
 import net.dontdrinkandroot.persistence.dao.EntityDao;
 import net.dontdrinkandroot.persistence.entity.Entity;
 import net.dontdrinkandroot.persistence.pagination.PaginatedResult;
 import net.dontdrinkandroot.persistence.pagination.Pagination;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.metamodel.SingularAttribute;
+import java.util.List;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 public class DaoEntityService<E extends Entity<I>, I> implements EntityService<E, I>
 {
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private EntityDao<E, I> dao;
-
 
 	protected DaoEntityService()
 	{
@@ -106,7 +105,8 @@ public class DaoEntityService<E extends Entity<I>, I> implements EntityService<E
 			int page,
 			int perPage,
 			SingularAttribute<? super E, ?> sortAttribute,
-			boolean asc)
+			boolean asc
+	)
 	{
 		long count = this.getDao().getCount();
 		List<E> results = this.getDao().findAll(sortAttribute, asc, (page - 1) * perPage, perPage);
@@ -120,8 +120,13 @@ public class DaoEntityService<E extends Entity<I>, I> implements EntityService<E
 		this.getDao().delete(entity);
 	}
 
+	public Logger getLogger()
+	{
+		return logger;
+	}
+
 	protected EntityDao<E, I> getDao()
 	{
 		return this.dao;
-	};
+	}
 }
