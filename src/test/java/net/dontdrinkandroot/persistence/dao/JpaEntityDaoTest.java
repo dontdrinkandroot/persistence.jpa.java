@@ -17,12 +17,10 @@
  */
 package net.dontdrinkandroot.persistence.dao;
 
-import java.util.Collections;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
+import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
+import net.dontdrinkandroot.persistence.entity.ExampleIdEntity_;
+import net.dontdrinkandroot.persistence.predicatebuilder.NumericOperator;
+import net.dontdrinkandroot.persistence.predicatebuilder.NumericPredicateBuilder;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,10 +30,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
-import net.dontdrinkandroot.persistence.entity.ExampleIdEntity_;
-import net.dontdrinkandroot.persistence.predicatebuilder.NumericOperator;
-import net.dontdrinkandroot.persistence.predicatebuilder.NumericPredicateBuilder;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.Collections;
+import java.util.List;
 
 
 /**
@@ -58,6 +56,16 @@ public class JpaEntityDaoTest
 	{
 		this.dao = new JpaEntityDao<ExampleIdEntity, Long>(ExampleIdEntity.class);
 		this.dao.setEntityManager(this.entityManager);
+	}
+
+	@Test
+	@Transactional(transactionManager = "transactionManager")
+	public void findAllWithLimit()
+	{
+		this.populateDatabase();
+
+		List<ExampleIdEntity> entities = this.dao.findAll(0, 10);
+		Assert.assertEquals(10, entities.size());
 	}
 
 	@Test

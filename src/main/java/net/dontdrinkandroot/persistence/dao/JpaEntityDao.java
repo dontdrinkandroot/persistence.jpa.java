@@ -17,8 +17,10 @@
  */
 package net.dontdrinkandroot.persistence.dao;
 
-import java.util.Collection;
-import java.util.List;
+import net.dontdrinkandroot.persistence.entity.Entity;
+import net.dontdrinkandroot.persistence.predicatebuilder.PredicateBuilder;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -26,12 +28,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
-
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
-
-import net.dontdrinkandroot.persistence.entity.Entity;
-import net.dontdrinkandroot.persistence.predicatebuilder.PredicateBuilder;
+import java.util.Collection;
+import java.util.List;
 
 
 /**
@@ -112,6 +110,17 @@ public class JpaEntityDao<E extends Entity<I>, I> extends JpaGenericDao implemen
 		}
 
 		return this.find(criteriaQuery);
+	}
+
+	@Override
+	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
+	public List<E> findAll(final int firstResult, final int maxResults)
+	{
+		final CriteriaBuilder builder = this.getCriteriaBuilder();
+		final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
+		final Root<E> from = criteriaQuery.from(this.entityClass);
+
+		return this.find(criteriaQuery, firstResult, maxResults);
 	}
 
 	@Override
