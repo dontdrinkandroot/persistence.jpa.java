@@ -20,8 +20,8 @@ package net.dontdrinkandroot.persistence.entity;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@StaticMetamodel(LongIdEntity.class)
-public abstract class LongIdEntity_ extends net.dontdrinkandroot.persistence.entity.AbstractEntity_
+@StaticMetamodel(GeneratedLongIdEntity.class)
+public abstract class GeneratedLongIdUuidEntity_ extends GeneratedLongIdEntity_
 {
-	public static volatile SingularAttribute<LongIdEntity, Long> id;
+	public static volatile SingularAttribute<GeneratedLongIdEntity, String> uuid;
 }
