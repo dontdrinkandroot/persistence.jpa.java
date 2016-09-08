@@ -33,22 +33,21 @@ import javax.persistence.MappedSuperclass;
 public abstract class AbstractIdEntity<K> extends AbstractEntity<K>
 {
 
-	@Id
-	private K id;
+    @Id
+    private K id;
 
+    protected AbstractIdEntity()
+    {
+    }
 
-	protected AbstractIdEntity()
-	{
-	}
+    public AbstractIdEntity(final K id)
+    {
+        this.id = id;
+    }
 
-	public AbstractIdEntity(final K id)
-	{
-		this.id = id;
-	}
-
-	@Override
-	public K getId()
-	{
-		return this.id;
-	}
+    @Override
+    public K getId()
+    {
+        return this.id;
+    }
 }

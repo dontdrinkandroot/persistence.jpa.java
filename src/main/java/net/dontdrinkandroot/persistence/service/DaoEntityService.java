@@ -33,100 +33,100 @@ import java.util.List;
  */
 public class DaoEntityService<E extends Entity<I>, I> implements EntityService<E, I>
 {
-	private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private EntityDao<E, I> dao;
+    private EntityDao<E, I> dao;
 
-	protected DaoEntityService()
-	{
-		/* Reflection instantiation */
-	}
+    protected DaoEntityService()
+    {
+        /* Reflection instantiation */
+    }
 
-	public DaoEntityService(EntityDao<E, I> dao)
-	{
-		this.dao = dao;
-	}
+    public DaoEntityService(EntityDao<E, I> dao)
+    {
+        this.dao = dao;
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public E find(I id)
-	{
-		return this.getDao().find(id);
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public E find(I id)
+    {
+        return this.getDao().find(id);
+    }
 
-	@Override
-	@Transactional
-	public E save(E entity)
-	{
-		E savedEntity = this.getDao().save(entity, true);
-		return savedEntity;
-	}
+    @Override
+    @Transactional
+    public E save(E entity)
+    {
+        E savedEntity = this.getDao().save(entity, true);
+        return savedEntity;
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<E> listAll()
-	{
-		return this.getDao().findAll();
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public List<E> listAll()
+    {
+        return this.getDao().findAll();
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public long findCount()
-	{
-		return this.getDao().getCount();
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public long findCount()
+    {
+        return this.getDao().getCount();
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<E> listAll(long first, long count)
-	{
-		return this.getDao().findAll(null, true, (int) first, (int) count);
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public List<E> listAll(long first, long count)
+    {
+        return this.getDao().findAll(null, true, (int) first, (int) count);
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<E> listAll(long first, long count, SingularAttribute<? super E, ?> sortAttribute, boolean asc)
-	{
-		return this.getDao().findAll(sortAttribute, asc, (int) first, (int) count);
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public List<E> listAll(long first, long count, SingularAttribute<? super E, ?> sortAttribute, boolean asc)
+    {
+        return this.getDao().findAll(sortAttribute, asc, (int) first, (int) count);
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public PaginatedResult<E> listPaginated(int page, int perPage)
-	{
-		long count = this.findCount();
-		List<E> results = this.getDao().findAll(null, true, (page - 1) * perPage, perPage);
-		return new PaginatedResult<E>(new Pagination(page, perPage, (int) count), results);
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public PaginatedResult<E> listPaginated(int page, int perPage)
+    {
+        long count = this.findCount();
+        List<E> results = this.getDao().findAll(null, true, (page - 1) * perPage, perPage);
+        return new PaginatedResult<E>(new Pagination(page, perPage, (int) count), results);
+    }
 
-	@Override
-	@Transactional(readOnly = true)
-	public PaginatedResult<E> listPaginated(
-			int page,
-			int perPage,
-			SingularAttribute<? super E, ?> sortAttribute,
-			boolean asc
-	)
-	{
-		long count = this.getDao().getCount();
-		List<E> results = this.getDao().findAll(sortAttribute, asc, (page - 1) * perPage, perPage);
-		return new PaginatedResult<E>(new Pagination(page, perPage, (int) count), results);
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public PaginatedResult<E> listPaginated(
+            int page,
+            int perPage,
+            SingularAttribute<? super E, ?> sortAttribute,
+            boolean asc
+    )
+    {
+        long count = this.getDao().getCount();
+        List<E> results = this.getDao().findAll(sortAttribute, asc, (page - 1) * perPage, perPage);
+        return new PaginatedResult<E>(new Pagination(page, perPage, (int) count), results);
+    }
 
-	@Override
-	@Transactional
-	public void delete(E entity)
-	{
-		this.getDao().delete(entity);
-	}
+    @Override
+    @Transactional
+    public void delete(E entity)
+    {
+        this.getDao().delete(entity);
+    }
 
-	public Logger getLogger()
-	{
-		return logger;
-	}
+    public Logger getLogger()
+    {
+        return logger;
+    }
 
-	protected EntityDao<E, I> getDao()
-	{
-		return this.dao;
-	}
+    protected EntityDao<E, I> getDao()
+    {
+        return this.dao;
+    }
 }

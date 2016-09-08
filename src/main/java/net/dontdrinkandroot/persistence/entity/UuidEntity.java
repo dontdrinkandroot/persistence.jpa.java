@@ -9,5 +9,5 @@ package net.dontdrinkandroot.persistence.entity;
 public interface UuidEntity<K> extends Entity<K>
 {
 
-	String getUuid();
+    String getUuid();
 }

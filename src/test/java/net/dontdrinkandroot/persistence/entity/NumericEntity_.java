@@ -27,12 +27,12 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class NumericEntity_ extends net.dontdrinkandroot.persistence.entity.AbstractGeneratedIdEntity_
 {
 
-	public static volatile SingularAttribute<NumericEntity, Float> floatField;
+    public static volatile SingularAttribute<NumericEntity, Float> floatField;
 
-	public static volatile SingularAttribute<NumericEntity, Double> doubleField;
+    public static volatile SingularAttribute<NumericEntity, Double> doubleField;
 
-	public static volatile SingularAttribute<NumericEntity, Integer> intField;
+    public static volatile SingularAttribute<NumericEntity, Integer> intField;
 
-	public static volatile SingularAttribute<NumericEntity, Long> longField;
+    public static volatile SingularAttribute<NumericEntity, Long> longField;
 
 }

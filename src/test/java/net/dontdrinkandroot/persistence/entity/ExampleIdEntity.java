@@ -24,47 +24,46 @@ import javax.persistence.Column;
 public class ExampleIdEntity extends AbstractIdEntity<Long>
 {
 
-	@Column
-	private String text;
+    @Column
+    private String text;
 
-	@Column
-	private Long number;
+    @Column
+    private Long number;
 
+    protected ExampleIdEntity()
+    {
+        /* Reflection instantiation */
+    }
 
-	protected ExampleIdEntity()
-	{
-		/* Reflection instantiation */
-	}
+    public ExampleIdEntity(final Long id)
+    {
+        super(id);
+    }
 
-	public ExampleIdEntity(final Long id)
-	{
-		super(id);
-	}
+    public ExampleIdEntity(final long id, final String text)
+    {
+        super(id);
 
-	public ExampleIdEntity(final long id, final String text)
-	{
-		super(id);
+        this.text = text;
+    }
 
-		this.text = text;
-	}
+    public void setText(final String text)
+    {
+        this.text = text;
+    }
 
-	public void setText(final String text)
-	{
-		this.text = text;
-	}
+    public String getText()
+    {
+        return this.text;
+    }
 
-	public String getText()
-	{
-		return this.text;
-	}
+    public Long getNumber()
+    {
+        return this.number;
+    }
 
-	public Long getNumber()
-	{
-		return this.number;
-	}
-
-	public void setNumber(Long number)
-	{
-		this.number = number;
-	}
+    public void setNumber(Long number)
+    {
+        this.number = number;
+    }
 }

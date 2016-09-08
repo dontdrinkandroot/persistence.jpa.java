@@ -34,15 +34,14 @@ import javax.persistence.MappedSuperclass;
 public abstract class AbstractGeneratedIdEntity<K> extends AbstractEntity<K>
 {
 
-	@Id
-	@GeneratedValue
-	private K id;
+    @Id
+    @GeneratedValue
+    private K id;
 
-
-	@Override
-	public K getId()
-	{
-		return this.id;
-	}
+    @Override
+    public K getId()
+    {
+        return this.id;
+    }
 
 }

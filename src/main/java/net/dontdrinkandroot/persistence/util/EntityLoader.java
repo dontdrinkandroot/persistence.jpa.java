@@ -7,5 +7,5 @@ import net.dontdrinkandroot.persistence.entity.Entity;
  */
 public interface EntityLoader
 {
-	<T extends Entity<K>, K> T load(K id, Class<T> entityClass);
+    <T extends Entity<K>, K> T load(K id, Class<T> entityClass);
 }

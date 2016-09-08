@@ -29,25 +29,24 @@ import javax.persistence.metamodel.SingularAttribute;
 public class NullPredicateBuilder<T> implements PredicateBuilder<T>
 {
 
-	private final boolean isNull;
+    private final boolean isNull;
 
-	private final SingularAttribute<? super T, ?> attribute;
+    private final SingularAttribute<? super T, ?> attribute;
 
+    public NullPredicateBuilder(final SingularAttribute<? super T, ?> attribute, final boolean isNull)
+    {
+        this.attribute = attribute;
+        this.isNull = isNull;
+    }
 
-	public NullPredicateBuilder(final SingularAttribute<? super T, ?> attribute, final boolean isNull)
-	{
-		this.attribute = attribute;
-		this.isNull = isNull;
-	}
-
-	@Override
-	public Predicate createPredicate(final CriteriaBuilder builder, final Path<? extends T> root)
-	{
-		if (this.isNull) {
-			return builder.isNull(root.get(this.attribute));
-		} else {
-			return builder.isNotNull(root.get(this.attribute));
-		}
-	}
+    @Override
+    public Predicate createPredicate(final CriteriaBuilder builder, final Path<? extends T> root)
+    {
+        if (this.isNull) {
+            return builder.isNull(root.get(this.attribute));
+        } else {
+            return builder.isNotNull(root.get(this.attribute));
+        }
+    }
 
 }

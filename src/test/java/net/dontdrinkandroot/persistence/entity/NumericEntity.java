@@ -25,64 +25,56 @@ import javax.persistence.Entity;
 public class NumericEntity extends AbstractGeneratedIdEntity<Long>
 {
 
-	@Column
-	private Float floatField;
+    @Column
+    private Float floatField;
 
-	@Column
-	private Double doubleField;
+    @Column
+    private Double doubleField;
 
-	@Column
-	private Integer intField;
+    @Column
+    private Integer intField;
 
-	@Column
-	private Long longField;
+    @Column
+    private Long longField;
 
+    public Float getFloatField()
+    {
+        return this.floatField;
+    }
 
-	public Float getFloatField()
-	{
-		return this.floatField;
-	}
+    public void setFloatField(final Float floatField)
+    {
+        this.floatField = floatField;
+    }
 
+    public Double getDoubleField()
+    {
+        return this.doubleField;
+    }
 
-	public void setFloatField(final Float floatField)
-	{
-		this.floatField = floatField;
-	}
+    public void setDoubleField(final Double doubleField)
+    {
+        this.doubleField = doubleField;
+    }
 
+    public Long getLongField()
+    {
+        return this.longField;
+    }
 
-	public Double getDoubleField()
-	{
-		return this.doubleField;
-	}
+    public void setLongField(final Long longField)
+    {
+        this.longField = longField;
+    }
 
+    public Integer getIntField()
+    {
+        return this.intField;
+    }
 
-	public void setDoubleField(final Double doubleField)
-	{
-		this.doubleField = doubleField;
-	}
-
-
-	public Long getLongField()
-	{
-		return this.longField;
-	}
-
-
-	public void setLongField(final Long longField)
-	{
-		this.longField = longField;
-	}
-
-
-	public Integer getIntField()
-	{
-		return this.intField;
-	}
-
-
-	public void setIntField(final Integer intField)
-	{
-		this.intField = intField;
-	}
+    public void setIntField(final Integer intField)
+    {
+        this.intField = intField;
+    }
 
 }

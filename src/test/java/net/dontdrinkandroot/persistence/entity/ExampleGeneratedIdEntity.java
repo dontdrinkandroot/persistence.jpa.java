@@ -17,76 +17,63 @@
  */
 package net.dontdrinkandroot.persistence.entity;
 
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-
 import net.dontdrinkandroot.persistence.ExampleEnum;
-
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+
+import javax.persistence.*;
+import java.util.List;
 
 
 @javax.persistence.Entity
 public class ExampleGeneratedIdEntity extends GeneratedLongIdEntity
 {
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@Fetch(FetchMode.JOIN)
-	private List<ExampleIdEntity> otherEntities;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
+    private List<ExampleIdEntity> otherEntities;
 
-	@Column
-	@Enumerated(EnumType.ORDINAL)
-	private ExampleEnum exampleEnum;
+    @Column
+    @Enumerated(EnumType.ORDINAL)
+    private ExampleEnum exampleEnum;
 
-	@Column
-	private Integer numericValue;
+    @Column
+    private Integer numericValue;
 
+    public ExampleGeneratedIdEntity()
+    {
+    }
 
-	public ExampleGeneratedIdEntity()
-	{
-	}
+    public void setOtherEntities(final List<ExampleIdEntity> otherEntities)
+    {
+        this.otherEntities = otherEntities;
+    }
 
+    public List<ExampleIdEntity> getOtherEntities()
+    {
+        return this.otherEntities;
+    }
 
-	public void setOtherEntities(final List<ExampleIdEntity> otherEntities)
-	{
-		this.otherEntities = otherEntities;
-	}
+    public ExampleEnum getExampleEnum()
+    {
+        return this.exampleEnum;
+    }
 
+    public ExampleGeneratedIdEntity setExampleEnum(final ExampleEnum exampleEnum)
+    {
+        this.exampleEnum = exampleEnum;
+        return this;
+    }
 
-	public List<ExampleIdEntity> getOtherEntities()
-	{
-		return this.otherEntities;
-	}
+    public Integer getNumericValue()
+    {
+        return this.numericValue;
+    }
 
-
-	public ExampleEnum getExampleEnum()
-	{
-		return this.exampleEnum;
-	}
-
-
-	public ExampleGeneratedIdEntity setExampleEnum(final ExampleEnum exampleEnum)
-	{
-		this.exampleEnum = exampleEnum;
-		return this;
-	}
-
-
-	public Integer getNumericValue()
-	{
-		return this.numericValue;
-	}
-
-
-	public ExampleGeneratedIdEntity setNumericValue(final Integer numericValue)
-	{
-		this.numericValue = numericValue;
-		return this;
-	}
+    public ExampleGeneratedIdEntity setNumericValue(final Integer numericValue)
+    {
+        this.numericValue = numericValue;
+        return this;
+    }
 
 }

@@ -29,46 +29,46 @@ import javax.persistence.metamodel.SingularAttribute;
 public class NumericPredicateBuilder<T> implements PredicateBuilder<T>
 {
 
-	private final NumericOperator operator;
+    private final NumericOperator operator;
 
-	private final Number literal;
+    private final Number literal;
 
-	private final SingularAttribute<? super T, ? extends Number> attribute;
+    private final SingularAttribute<? super T, ? extends Number> attribute;
 
+    public NumericPredicateBuilder(
+            final SingularAttribute<? super T, ? extends Number> attribute,
+            final NumericOperator operator,
+            final Number literal
+    )
+    {
+        this.attribute = attribute;
+        this.operator = operator;
+        this.literal = literal;
+    }
 
-	public NumericPredicateBuilder(
-			final SingularAttribute<? super T, ? extends Number> attribute,
-			final NumericOperator operator,
-			final Number literal)
-	{
-		this.attribute = attribute;
-		this.operator = operator;
-		this.literal = literal;
-	}
+    @Override
+    public Predicate createPredicate(final CriteriaBuilder builder, final Path<? extends T> root)
+    {
+        switch (this.operator) {
 
-	@Override
-	public Predicate createPredicate(final CriteriaBuilder builder, final Path<? extends T> root)
-	{
-		switch (this.operator) {
+            case EQUALS:
+                return builder.equal(root.get(this.attribute), this.literal);
 
-			case EQUALS:
-				return builder.equal(root.get(this.attribute), this.literal);
+            case GREATER_EQUALS:
+                return builder.ge(root.get(this.attribute), this.literal);
 
-			case GREATER_EQUALS:
-				return builder.ge(root.get(this.attribute), this.literal);
+            case GREATER_THAN:
+                return builder.gt(root.get(this.attribute), this.literal);
 
-			case GREATER_THAN:
-				return builder.gt(root.get(this.attribute), this.literal);
+            case LESS_EQUALS:
+                return builder.le(root.get(this.attribute), this.literal);
 
-			case LESS_EQUALS:
-				return builder.le(root.get(this.attribute), this.literal);
+            case LESS_THAN:
+                return builder.lt(root.get(this.attribute), this.literal);
 
-			case LESS_THAN:
-				return builder.lt(root.get(this.attribute), this.literal);
-
-			default:
-				throw new RuntimeException("Unknown operator " + this.operator);
-		}
-	}
+            default:
+                throw new RuntimeException("Unknown operator " + this.operator);
+        }
+    }
 
 }

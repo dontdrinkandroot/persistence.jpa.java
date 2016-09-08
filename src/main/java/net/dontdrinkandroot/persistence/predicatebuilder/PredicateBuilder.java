@@ -17,11 +17,11 @@
  */
 package net.dontdrinkandroot.persistence.predicatebuilder;
 
+import net.dontdrinkandroot.persistence.entity.Entity;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
-
-import net.dontdrinkandroot.persistence.entity.Entity;
 
 
 /**
@@ -35,9 +35,9 @@ import net.dontdrinkandroot.persistence.entity.Entity;
 public interface PredicateBuilder<E>
 {
 
-	/**
-	 * Builds a predicate with the given builder that is derived from the given path.
-	 */
-	Predicate createPredicate(CriteriaBuilder builder, Path<? extends E> path);
+    /**
+     * Builds a predicate with the given builder that is derived from the given path.
+     */
+    Predicate createPredicate(CriteriaBuilder builder, Path<? extends E> path);
 
 }

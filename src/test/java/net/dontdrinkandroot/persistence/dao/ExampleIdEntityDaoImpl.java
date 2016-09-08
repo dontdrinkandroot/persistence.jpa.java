@@ -23,10 +23,10 @@ import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
 public class ExampleIdEntityDaoImpl extends JpaEntityDao<ExampleIdEntity, Long> implements ExampleIdEntityDao
 {
 
-	public ExampleIdEntityDaoImpl()
-	{
+    public ExampleIdEntityDaoImpl()
+    {
 
-		super(ExampleIdEntity.class);
-	}
+        super(ExampleIdEntity.class);
+    }
 
 }

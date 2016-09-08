@@ -17,14 +17,11 @@
  */
 package net.dontdrinkandroot.persistence.dao;
 
-import java.util.List;
-
 import net.dontdrinkandroot.persistence.entity.ExampleGeneratedIdEntity;
 import net.dontdrinkandroot.persistence.entity.ExampleGeneratedIdEntity_;
 import net.dontdrinkandroot.persistence.predicatebuilder.NullPredicateBuilder;
 import net.dontdrinkandroot.persistence.predicatebuilder.NumericOperator;
 import net.dontdrinkandroot.persistence.predicatebuilder.NumericPredicateBuilder;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +31,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:database.xml" })
@@ -41,97 +40,100 @@ import org.springframework.transaction.annotation.Transactional;
 public class PredicateBuilderTest
 {
 
-	@Autowired
-	private ExampleGeneratedIdEntityDao generatedIdEntityDao;
+    @Autowired
+    private ExampleGeneratedIdEntityDao generatedIdEntityDao;
 
+    @Test
+    @Transactional
+    public void testNumericFilters()
+    {
+        ExampleGeneratedIdEntity e1 = new ExampleGeneratedIdEntity().setNumericValue(1);
+        e1 = this.generatedIdEntityDao.save(e1);
+        ExampleGeneratedIdEntity e2 = new ExampleGeneratedIdEntity().setNumericValue(2);
+        e2 = this.generatedIdEntityDao.save(e2);
+        ExampleGeneratedIdEntity e3 = new ExampleGeneratedIdEntity().setNumericValue(3);
+        e3 = this.generatedIdEntityDao.save(e3);
+        ExampleGeneratedIdEntity e4 = new ExampleGeneratedIdEntity().setNumericValue(4);
+        e4 = this.generatedIdEntityDao.save(e4);
+        ExampleGeneratedIdEntity e5 = new ExampleGeneratedIdEntity().setNumericValue(5);
+        e5 = this.generatedIdEntityDao.save(e5);
 
-	@Test
-	@Transactional
-	public void testNumericFilters()
-	{
-		ExampleGeneratedIdEntity e1 = new ExampleGeneratedIdEntity().setNumericValue(1);
-		e1 = this.generatedIdEntityDao.save(e1);
-		ExampleGeneratedIdEntity e2 = new ExampleGeneratedIdEntity().setNumericValue(2);
-		e2 = this.generatedIdEntityDao.save(e2);
-		ExampleGeneratedIdEntity e3 = new ExampleGeneratedIdEntity().setNumericValue(3);
-		e3 = this.generatedIdEntityDao.save(e3);
-		ExampleGeneratedIdEntity e4 = new ExampleGeneratedIdEntity().setNumericValue(4);
-		e4 = this.generatedIdEntityDao.save(e4);
-		ExampleGeneratedIdEntity e5 = new ExampleGeneratedIdEntity().setNumericValue(5);
-		e5 = this.generatedIdEntityDao.save(e5);
+        final NumericPredicateBuilder<ExampleGeneratedIdEntity> lt2 =
+                new NumericPredicateBuilder<ExampleGeneratedIdEntity>(
+                        ExampleGeneratedIdEntity_.numericValue,
+                        NumericOperator.LESS_THAN,
+                        2
+                );
+        final NumericPredicateBuilder<ExampleGeneratedIdEntity> le1 =
+                new NumericPredicateBuilder<ExampleGeneratedIdEntity>(
+                        ExampleGeneratedIdEntity_.numericValue,
+                        NumericOperator.LESS_EQUALS,
+                        1
+                );
+        final NumericPredicateBuilder<ExampleGeneratedIdEntity> eq3 =
+                new NumericPredicateBuilder<ExampleGeneratedIdEntity>(
+                        ExampleGeneratedIdEntity_.numericValue,
+                        NumericOperator.EQUALS,
+                        3
+                );
+        final NumericPredicateBuilder<ExampleGeneratedIdEntity> ge5 =
+                new NumericPredicateBuilder<ExampleGeneratedIdEntity>(
+                        ExampleGeneratedIdEntity_.numericValue,
+                        NumericOperator.GREATER_EQUALS,
+                        5
+                );
+        final NumericPredicateBuilder<ExampleGeneratedIdEntity> gt4 =
+                new NumericPredicateBuilder<ExampleGeneratedIdEntity>(
+                        ExampleGeneratedIdEntity_.numericValue,
+                        NumericOperator.GREATER_THAN,
+                        4
+                );
 
-		final NumericPredicateBuilder<ExampleGeneratedIdEntity> lt2 =
-				new NumericPredicateBuilder<ExampleGeneratedIdEntity>(
-						ExampleGeneratedIdEntity_.numericValue,
-						NumericOperator.LESS_THAN,
-						2);
-		final NumericPredicateBuilder<ExampleGeneratedIdEntity> le1 =
-				new NumericPredicateBuilder<ExampleGeneratedIdEntity>(
-						ExampleGeneratedIdEntity_.numericValue,
-						NumericOperator.LESS_EQUALS,
-						1);
-		final NumericPredicateBuilder<ExampleGeneratedIdEntity> eq3 =
-				new NumericPredicateBuilder<ExampleGeneratedIdEntity>(
-						ExampleGeneratedIdEntity_.numericValue,
-						NumericOperator.EQUALS,
-						3);
-		final NumericPredicateBuilder<ExampleGeneratedIdEntity> ge5 =
-				new NumericPredicateBuilder<ExampleGeneratedIdEntity>(
-						ExampleGeneratedIdEntity_.numericValue,
-						NumericOperator.GREATER_EQUALS,
-						5);
-		final NumericPredicateBuilder<ExampleGeneratedIdEntity> gt4 =
-				new NumericPredicateBuilder<ExampleGeneratedIdEntity>(
-						ExampleGeneratedIdEntity_.numericValue,
-						NumericOperator.GREATER_THAN,
-						4);
+        List<ExampleGeneratedIdEntity> result = this.generatedIdEntityDao.findAll(lt2);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals(e1, result.iterator().next());
 
-		List<ExampleGeneratedIdEntity> result = this.generatedIdEntityDao.findAll(lt2);
-		Assert.assertEquals(1, result.size());
-		Assert.assertEquals(e1, result.iterator().next());
+        result = this.generatedIdEntityDao.findAll(le1);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals(e1, result.iterator().next());
 
-		result = this.generatedIdEntityDao.findAll(le1);
-		Assert.assertEquals(1, result.size());
-		Assert.assertEquals(e1, result.iterator().next());
+        result = this.generatedIdEntityDao.findAll(eq3);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals(e3, result.iterator().next());
 
-		result = this.generatedIdEntityDao.findAll(eq3);
-		Assert.assertEquals(1, result.size());
-		Assert.assertEquals(e3, result.iterator().next());
+        result = this.generatedIdEntityDao.findAll(ge5);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals(e5, result.iterator().next());
 
-		result = this.generatedIdEntityDao.findAll(ge5);
-		Assert.assertEquals(1, result.size());
-		Assert.assertEquals(e5, result.iterator().next());
+        result = this.generatedIdEntityDao.findAll(gt4);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals(e5, result.iterator().next());
+    }
 
-		result = this.generatedIdEntityDao.findAll(gt4);
-		Assert.assertEquals(1, result.size());
-		Assert.assertEquals(e5, result.iterator().next());
-	}
+    @Test
+    @Transactional
+    public void testNullFilters()
+    {
+        ExampleGeneratedIdEntity e1 = new ExampleGeneratedIdEntity();
+        e1 = this.generatedIdEntityDao.save(e1);
+        ExampleGeneratedIdEntity e2 = new ExampleGeneratedIdEntity().setNumericValue(1);
+        e2 = this.generatedIdEntityDao.save(e2);
 
+        final NullPredicateBuilder<ExampleGeneratedIdEntity> isNullFilter =
+                new NullPredicateBuilder<ExampleGeneratedIdEntity>(ExampleGeneratedIdEntity_.numericValue, true);
 
-	@Test
-	@Transactional
-	public void testNullFilters()
-	{
-		ExampleGeneratedIdEntity e1 = new ExampleGeneratedIdEntity();
-		e1 = this.generatedIdEntityDao.save(e1);
-		ExampleGeneratedIdEntity e2 = new ExampleGeneratedIdEntity().setNumericValue(1);
-		e2 = this.generatedIdEntityDao.save(e2);
+        final NullPredicateBuilder<ExampleGeneratedIdEntity> notNullFilter =
+                new NullPredicateBuilder<ExampleGeneratedIdEntity>(ExampleGeneratedIdEntity_.numericValue, false);
 
-		final NullPredicateBuilder<ExampleGeneratedIdEntity> isNullFilter =
-				new NullPredicateBuilder<ExampleGeneratedIdEntity>(ExampleGeneratedIdEntity_.numericValue, true);
+        List<ExampleGeneratedIdEntity> result = this.generatedIdEntityDao.findAll(isNullFilter);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals(e1, result.iterator().next());
 
-		final NullPredicateBuilder<ExampleGeneratedIdEntity> notNullFilter =
-				new NullPredicateBuilder<ExampleGeneratedIdEntity>(ExampleGeneratedIdEntity_.numericValue, false);
+        result = this.generatedIdEntityDao.findAll(notNullFilter);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals(e2, result.iterator().next());
 
-		List<ExampleGeneratedIdEntity> result = this.generatedIdEntityDao.findAll(isNullFilter);
-		Assert.assertEquals(1, result.size());
-		Assert.assertEquals(e1, result.iterator().next());
-
-		result = this.generatedIdEntityDao.findAll(notNullFilter);
-		Assert.assertEquals(1, result.size());
-		Assert.assertEquals(e2, result.iterator().next());
-
-		result = this.generatedIdEntityDao.findAll(notNullFilter, isNullFilter);
-		Assert.assertEquals(0, result.size());
-	}
+        result = this.generatedIdEntityDao.findAll(notNullFilter, isNullFilter);
+        Assert.assertEquals(0, result.size());
+    }
 }

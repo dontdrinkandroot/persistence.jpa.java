@@ -23,5 +23,5 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(GeneratedLongIdEntity.class)
 public abstract class GeneratedLongIdUuidEntity_ extends GeneratedLongIdEntity_
 {
-	public static volatile SingularAttribute<GeneratedLongIdEntity, String> uuid;
+    public static volatile SingularAttribute<GeneratedLongIdEntity, String> uuid;
 }

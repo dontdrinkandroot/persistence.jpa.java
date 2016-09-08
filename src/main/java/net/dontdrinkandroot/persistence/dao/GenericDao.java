@@ -17,9 +17,9 @@
  */
 package net.dontdrinkandroot.persistence.dao;
 
-import java.util.List;
-
 import net.dontdrinkandroot.persistence.entity.Entity;
+
+import java.util.List;
 
 
 /**
@@ -30,68 +30,67 @@ import net.dontdrinkandroot.persistence.entity.Entity;
 public interface GenericDao
 {
 
-	/**
-	 * Adds the given entity to the persistence context and performs a flush.
-	 *
-	 * @return The saved instance of the entity.
-	 */
-	<E extends Entity<K>, K> E persist(E entity);
+    /**
+     * Adds the given entity to the persistence context and performs a flush.
+     *
+     * @return The saved instance of the entity.
+     */
+    <E extends Entity<K>, K> E persist(E entity);
 
-	/**
-	 * Adds the given entity to the persistence context.
-	 *
-	 * @return The saved instance of the entity.
-	 */
-	<E extends Entity<K>, K> E persist(E entity, boolean flush);
+    /**
+     * Adds the given entity to the persistence context.
+     *
+     * @return The saved instance of the entity.
+     */
+    <E extends Entity<K>, K> E persist(E entity, boolean flush);
 
-	/**
-	 * Saves the given entity.
-	 *
-	 * @return The saved instance of the entity.
-	 */
-	<E extends Entity<K>, K> E save(E entity);
+    /**
+     * Saves the given entity.
+     *
+     * @return The saved instance of the entity.
+     */
+    <E extends Entity<K>, K> E save(E entity);
 
-	/**
-	 * Saves the given entity.
-	 *
-	 * @param flush
-	 *            Whether to flush after saving.
-	 * @return The saved instance of the entity.
-	 */
-	<E extends Entity<K>, K> E save(E entity, boolean flush);
+    /**
+     * Saves the given entity.
+     *
+     * @param flush Whether to flush after saving.
+     * @return The saved instance of the entity.
+     */
+    <E extends Entity<K>, K> E save(E entity, boolean flush);
 
-	/**
-	 * Deletes the given entity of the given class.
-	 */
-	<E extends Entity<K>, K> void delete(final E entity, final Class<E> clazz);
+    /**
+     * Deletes the given entity of the given class.
+     */
+    <E extends Entity<K>, K> void delete(final E entity, final Class<E> clazz);
 
-	/**
-	 * Deletes the entity with the given id of the given class.
-	 */
-	<E extends Entity<K>, K> void delete(final K id, final Class<E> clazz);
+    /**
+     * Deletes the entity with the given id of the given class.
+     */
+    <E extends Entity<K>, K> void delete(final K id, final Class<E> clazz);
 
-	/**
-	 * Finds the entity with the given id of the given class.
-	 */
-	<E extends Entity<K>, K> E find(final K id, final Class<E> clazz);
+    /**
+     * Finds the entity with the given id of the given class.
+     */
+    <E extends Entity<K>, K> E find(final K id, final Class<E> clazz);
 
-	/**
-	 * Finds all entities of the given class.
-	 */
-	<E extends Entity<K>, K> List<E> findAll(final Class<E> clazz);
+    /**
+     * Finds all entities of the given class.
+     */
+    <E extends Entity<K>, K> List<E> findAll(final Class<E> clazz);
 
-	/**
-	 * Loads the entity with the given id of the given class or throws an Exception if it was not found.
-	 */
-	<E extends Entity<K>, K> E load(final K id, final Class<E> clazz);
+    /**
+     * Loads the entity with the given id of the given class or throws an Exception if it was not found.
+     */
+    <E extends Entity<K>, K> E load(final K id, final Class<E> clazz);
 
-	/**
-	 * Counts the entities of the given class.
-	 */
-	<E extends Entity<K>, K> long getCount(final Class<E> clazz);
+    /**
+     * Counts the entities of the given class.
+     */
+    <E extends Entity<K>, K> long getCount(final Class<E> clazz);
 
-	/**
-	 * Synchronize the persistence context to the underlying database.
-	 */
-	void flush();
+    /**
+     * Synchronize the persistence context to the underlying database.
+     */
+    void flush();
 }

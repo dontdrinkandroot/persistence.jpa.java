@@ -17,21 +17,19 @@
  */
 package net.dontdrinkandroot.persistence.dao;
 
-import java.util.List;
-
 import net.dontdrinkandroot.persistence.ExampleEnum;
 import net.dontdrinkandroot.persistence.entity.ExampleGeneratedIdEntity;
+
+import java.util.List;
 
 
 public interface ExampleGeneratedIdEntityDao extends EntityDao<ExampleGeneratedIdEntity, Long>
 {
 
-	List<ExampleGeneratedIdEntity> findByOtherText(String text);
+    List<ExampleGeneratedIdEntity> findByOtherText(String text);
 
+    ExampleEnum findMaxEnum();
 
-	ExampleEnum findMaxEnum();
-
-
-	ExampleGeneratedIdEntity findWithOthersFetchJoin(Long id);
+    ExampleGeneratedIdEntity findWithOthersFetchJoin(Long id);
 
 }

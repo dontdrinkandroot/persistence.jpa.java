@@ -12,23 +12,23 @@ import javax.persistence.PersistenceContext;
  */
 public class EntityManagerEntityLoader implements EntityLoader
 {
-	private EntityManager entityManager;
+    private EntityManager entityManager;
 
-	@Override
-	@Transactional(readOnly = true)
-	public <T extends Entity<K>, K> T load(K id, Class<T> entityClass)
-	{
-		T entity = this.entityManager.find(entityClass, id);
-		if (null == entity) {
-			throw new NoResultException();
-		}
+    @Override
+    @Transactional(readOnly = true)
+    public <T extends Entity<K>, K> T load(K id, Class<T> entityClass)
+    {
+        T entity = this.entityManager.find(entityClass, id);
+        if (null == entity) {
+            throw new NoResultException();
+        }
 
-		return entity;
-	}
+        return entity;
+    }
 
-	@PersistenceContext
-	public void setEntityManager(EntityManager entityManager)
-	{
-		this.entityManager = entityManager;
-	}
+    @PersistenceContext
+    public void setEntityManager(EntityManager entityManager)
+    {
+        this.entityManager = entityManager;
+    }
 }

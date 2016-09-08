@@ -45,67 +45,67 @@ import java.util.List;
 public class JpaEntityDaoTest
 {
 
-	@PersistenceContext
-	EntityManager entityManager;
+    @PersistenceContext
+    EntityManager entityManager;
 
-	private JpaEntityDao<ExampleIdEntity, Long> dao;
+    private JpaEntityDao<ExampleIdEntity, Long> dao;
 
+    @Before
+    public void beforeMethod()
+    {
+        this.dao = new JpaEntityDao<ExampleIdEntity, Long>(ExampleIdEntity.class);
+        this.dao.setEntityManager(this.entityManager);
+    }
 
-	@Before
-	public void beforeMethod()
-	{
-		this.dao = new JpaEntityDao<ExampleIdEntity, Long>(ExampleIdEntity.class);
-		this.dao.setEntityManager(this.entityManager);
-	}
+    @Test
+    @Transactional(transactionManager = "transactionManager")
+    public void findAllWithLimit()
+    {
+        this.populateDatabase();
 
-	@Test
-	@Transactional(transactionManager = "transactionManager")
-	public void findAllWithLimit()
-	{
-		this.populateDatabase();
+        List<ExampleIdEntity> entities = this.dao.findAll(0, 10);
+        Assert.assertEquals(10, entities.size());
+    }
 
-		List<ExampleIdEntity> entities = this.dao.findAll(0, 10);
-		Assert.assertEquals(10, entities.size());
-	}
+    @Test
+    @Transactional(transactionManager = "transactionManager")
+    public void findAllWithSort()
+    {
+        this.populateDatabase();
 
-	@Test
-	@Transactional(transactionManager = "transactionManager")
-	public void findAllWithSort()
-	{
-		this.populateDatabase();
+        List<ExampleIdEntity> entities = this.dao.findAll(ExampleIdEntity_.text, true);
+        Assert.assertEquals(100, entities.size());
+        Assert.assertEquals("10", entities.get(2).getText());
 
-		List<ExampleIdEntity> entities = this.dao.findAll(ExampleIdEntity_.text, true);
-		Assert.assertEquals(100, entities.size());
-		Assert.assertEquals("10", entities.get(2).getText());
+        entities = this.dao.findAll(ExampleIdEntity_.text, false);
 
-		entities = this.dao.findAll(ExampleIdEntity_.text, false);
+        Assert.assertEquals(100, entities.size());
+        Assert.assertEquals("9", entities.get(10).getText());
+    }
 
-		Assert.assertEquals(100, entities.size());
-		Assert.assertEquals("9", entities.get(10).getText());
-	}
+    @Test
+    @Transactional(transactionManager = "transactionManager")
+    public void findAllWithPredicateCollection()
+    {
+        this.populateDatabase();
 
-	@Test
-	@Transactional(transactionManager = "transactionManager")
-	public void findAllWithPredicateCollection()
-	{
-		this.populateDatabase();
+        List<ExampleIdEntity> entities = this.dao.findAll(
+                Collections.singletonList(
+                        new NumericPredicateBuilder<ExampleIdEntity>(
+                                ExampleIdEntity_.number,
+                                NumericOperator.GREATER_THAN,
+                                10
+                        )));
+        Assert.assertEquals(89, entities.size());
+    }
 
-		List<ExampleIdEntity> entities = this.dao.findAll(
-				Collections.singletonList(
-						new NumericPredicateBuilder<ExampleIdEntity>(
-								ExampleIdEntity_.number,
-								NumericOperator.GREATER_THAN,
-								10)));
-		Assert.assertEquals(89, entities.size());
-	}
-
-	private void populateDatabase()
-	{
-		for (long i = 0; i < 100; i++) {
-			ExampleIdEntity entity = new ExampleIdEntity(i, Long.toString(i));
-			entity.setNumber(i);
-			this.dao.save(entity, false);
-		}
-		this.dao.flush();
-	}
+    private void populateDatabase()
+    {
+        for (long i = 0; i < 100; i++) {
+            ExampleIdEntity entity = new ExampleIdEntity(i, Long.toString(i));
+            entity.setNumber(i);
+            this.dao.save(entity, false);
+        }
+        this.dao.flush();
+    }
 }

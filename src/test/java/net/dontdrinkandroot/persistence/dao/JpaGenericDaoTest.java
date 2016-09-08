@@ -17,14 +17,8 @@
  */
 package net.dontdrinkandroot.persistence.dao;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
+import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
+import net.dontdrinkandroot.persistence.entity.ExampleIdEntity_;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,8 +30,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
-import net.dontdrinkandroot.persistence.entity.ExampleIdEntity_;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 
 /**
@@ -49,116 +48,115 @@ import net.dontdrinkandroot.persistence.entity.ExampleIdEntity_;
 public class JpaGenericDaoTest
 {
 
-	@PersistenceContext
-	EntityManager entityManager;
+    @PersistenceContext
+    EntityManager entityManager;
 
-	private JpaGenericDao dao;
+    private JpaGenericDao dao;
 
+    @Before
+    public void beforeMethod()
+    {
+        this.dao = new JpaGenericDao();
+        this.dao.setEntityManager(this.entityManager);
+    }
 
-	@Before
-	public void beforeMethod()
-	{
-		this.dao = new JpaGenericDao();
-		this.dao.setEntityManager(this.entityManager);
-	}
+    @Test
+    public void testLogger()
+    {
+        Logger logger = LoggerFactory.getLogger(JpaGenericDaoTest.class);
+        this.dao.setLogger(logger);
+        Assert.assertEquals(logger, this.dao.getLogger());
+    }
 
-	@Test
-	public void testLogger()
-	{
-		Logger logger = LoggerFactory.getLogger(JpaGenericDaoTest.class);
-		this.dao.setLogger(logger);
-		Assert.assertEquals(logger, this.dao.getLogger());
-	}
+    @Test(expected = NoResultException.class)
+    @Transactional(transactionManager = "transactionManager")
+    public void testLoadNonExisting()
+    {
+        this.dao.load(new Long(1L), ExampleIdEntity.class);
+    }
 
-	@Test(expected = NoResultException.class)
-	@Transactional(transactionManager = "transactionManager")
-	public void testLoadNonExisting()
-	{
-		this.dao.load(new Long(1L), ExampleIdEntity.class);
-	}
+    @Test
+    @Transactional(transactionManager = "transactionManager")
+    public void testSaveFindDelete()
+    {
+        Assert.assertEquals(0, this.dao.getCount(ExampleIdEntity.class));
+        ExampleIdEntity entity = new ExampleIdEntity(1L, "one");
+        this.dao.save(entity);
+        Assert.assertEquals(1, this.dao.getCount(ExampleIdEntity.class));
+        Assert.assertEquals(entity, this.dao.find(1L, ExampleIdEntity.class));
+        this.dao.delete(entity, ExampleIdEntity.class);
+        Assert.assertEquals(0, this.dao.getCount(ExampleIdEntity.class));
 
-	@Test
-	@Transactional(transactionManager = "transactionManager")
-	public void testSaveFindDelete()
-	{
-		Assert.assertEquals(0, this.dao.getCount(ExampleIdEntity.class));
-		ExampleIdEntity entity = new ExampleIdEntity(1L, "one");
-		this.dao.save(entity);
-		Assert.assertEquals(1, this.dao.getCount(ExampleIdEntity.class));
-		Assert.assertEquals(entity, this.dao.find(1L, ExampleIdEntity.class));
-		this.dao.delete(entity, ExampleIdEntity.class);
-		Assert.assertEquals(0, this.dao.getCount(ExampleIdEntity.class));
+        entity = new ExampleIdEntity(2L, "two");
+        this.dao.persist(entity);
+        Assert.assertEquals(1, this.dao.getCount(ExampleIdEntity.class));
+        this.dao.delete((ExampleIdEntity) null, ExampleIdEntity.class);
+        this.dao.delete((Long) null, ExampleIdEntity.class);
+        Assert.assertEquals(1, this.dao.getCount(ExampleIdEntity.class));
+        this.dao.delete(new Long(3L), ExampleIdEntity.class);
+        Assert.assertEquals(1, this.dao.getCount(ExampleIdEntity.class));
+        this.dao.delete(new Long(2L), ExampleIdEntity.class);
+        Assert.assertEquals(0, this.dao.getCount(ExampleIdEntity.class));
+    }
 
-		entity = new ExampleIdEntity(2L, "two");
-		this.dao.persist(entity);
-		Assert.assertEquals(1, this.dao.getCount(ExampleIdEntity.class));
-		this.dao.delete((ExampleIdEntity) null, ExampleIdEntity.class);
-		this.dao.delete((Long) null, ExampleIdEntity.class);
-		Assert.assertEquals(1, this.dao.getCount(ExampleIdEntity.class));
-		this.dao.delete(new Long(3L), ExampleIdEntity.class);
-		Assert.assertEquals(1, this.dao.getCount(ExampleIdEntity.class));
-		this.dao.delete(new Long(2L), ExampleIdEntity.class);
-		Assert.assertEquals(0, this.dao.getCount(ExampleIdEntity.class));
-	}
+    @Test
+    @Transactional(transactionManager = "transactionManager")
+    public void testFindSingleOrNull()
+    {
+        this.populateDatabase();
 
-	@Test
-	@Transactional(transactionManager = "transactionManager")
-	public void testFindSingleOrNull()
-	{
-		this.populateDatabase();
+        CriteriaBuilder criteriaBuilder = this.dao.getCriteriaBuilder();
 
-		CriteriaBuilder criteriaBuilder = this.dao.getCriteriaBuilder();
+        CriteriaQuery<ExampleIdEntity> query = criteriaBuilder.createQuery(ExampleIdEntity.class);
+        Root<ExampleIdEntity> root = query.from(ExampleIdEntity.class);
+        query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.id), 1L));
+        Assert.assertEquals(new Long(1L), this.dao.findSingleOrNull(query).getId());
 
-		CriteriaQuery<ExampleIdEntity> query = criteriaBuilder.createQuery(ExampleIdEntity.class);
-		Root<ExampleIdEntity> root = query.from(ExampleIdEntity.class);
-		query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.id), 1L));
-		Assert.assertEquals(new Long(1L), this.dao.findSingleOrNull(query).getId());
+        query = criteriaBuilder.createQuery(ExampleIdEntity.class);
+        root = query.from(ExampleIdEntity.class);
+        query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.id), 120L));
+        Assert.assertNull(this.dao.findSingleOrNull(query));
 
-		query = criteriaBuilder.createQuery(ExampleIdEntity.class);
-		root = query.from(ExampleIdEntity.class);
-		query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.id), 120L));
-		Assert.assertNull(this.dao.findSingleOrNull(query));
+        try {
+            query = criteriaBuilder.createQuery(ExampleIdEntity.class);
+            root = query.from(ExampleIdEntity.class);
+            query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.text), "red"));
+            this.dao.findSingleOrNull(query);
+            Assert.fail("NonUniqueResultException expected");
+        } catch (NonUniqueResultException e) {
+            /* Expected */
+        }
+    }
 
-		try {
-			query = criteriaBuilder.createQuery(ExampleIdEntity.class);
-			root = query.from(ExampleIdEntity.class);
-			query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.text), "red"));
-			this.dao.findSingleOrNull(query);
-			Assert.fail("NonUniqueResultException expected");
-		} catch (NonUniqueResultException e) {
-			/* Expected */
-		}
-	}
+    @Test
+    @Transactional(transactionManager = "transactionManager")
+    public void testFindFirstOrNull()
+    {
+        this.populateDatabase();
 
-	@Test
-	@Transactional(transactionManager = "transactionManager")
-	public void testFindFirstOrNull()
-	{
-		this.populateDatabase();
+        CriteriaBuilder criteriaBuilder = this.dao.getCriteriaBuilder();
 
-		CriteriaBuilder criteriaBuilder = this.dao.getCriteriaBuilder();
+        CriteriaQuery<ExampleIdEntity> query;
+        Root<ExampleIdEntity> root;
 
-		CriteriaQuery<ExampleIdEntity> query;
-		Root<ExampleIdEntity> root;
+        query = criteriaBuilder.createQuery(ExampleIdEntity.class);
+        root = query.from(ExampleIdEntity.class);
+        query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.id), 120L));
+        Assert.assertNull(this.dao.findFirstOrNull(query));
 
-		query = criteriaBuilder.createQuery(ExampleIdEntity.class);
-		root = query.from(ExampleIdEntity.class);
-		query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.id), 120L));
-		Assert.assertNull(this.dao.findFirstOrNull(query));
+        query = criteriaBuilder.createQuery(ExampleIdEntity.class);
+        root = query.from(ExampleIdEntity.class);
+        query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.text), "red"));
+        Assert.assertEquals(new Long(0L), this.dao.findFirstOrNull(query).getId());
+    }
 
-		query = criteriaBuilder.createQuery(ExampleIdEntity.class);
-		root = query.from(ExampleIdEntity.class);
-		query.where(criteriaBuilder.equal(root.get(ExampleIdEntity_.text), "red"));
-		Assert.assertEquals(new Long(0L), this.dao.findFirstOrNull(query).getId());
-	}
-
-	private void populateDatabase()
-	{
-		String[] texts = new String[] { "red", "green", "blue" };
-		for (long i = 0; i < 100; i++) {
-			ExampleIdEntity entity = new ExampleIdEntity(i, texts[(int) (i % 3)]);
-			this.dao.save(entity, false);
-		}
-		this.dao.flush();
-	}
+    private void populateDatabase()
+    {
+        String[] texts = new String[]{"red", "green", "blue"};
+        for (long i = 0; i < 100; i++) {
+            ExampleIdEntity entity = new ExampleIdEntity(i, texts[(int) (i % 3)]);
+            this.dao.save(entity, false);
+        }
+        this.dao.flush();
+    }
 }

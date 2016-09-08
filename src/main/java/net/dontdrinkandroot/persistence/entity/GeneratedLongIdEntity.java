@@ -28,13 +28,13 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class GeneratedLongIdEntity extends AbstractEntity<Long>
 {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Override
-	public Long getId()
-	{
-		return this.id;
-	}
+    @Override
+    public Long getId()
+    {
+        return this.id;
+    }
 }

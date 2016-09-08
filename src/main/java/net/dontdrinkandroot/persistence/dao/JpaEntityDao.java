@@ -45,157 +45,157 @@ import java.util.List;
 public class JpaEntityDao<E extends Entity<I>, I> extends JpaGenericDao implements EntityDao<E, I>
 {
 
-	protected Class<E> entityClass;
+    protected Class<E> entityClass;
 
+    public JpaEntityDao(final Class<E> entityClass)
+    {
+        this.entityClass = entityClass;
+    }
 
-	public JpaEntityDao(final Class<E> entityClass)
-	{
-		this.entityClass = entityClass;
-	}
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void delete(final E entity)
+    {
+        super.delete(entity, this.entityClass);
+    }
 
-	@Override
-	@Transactional(propagation = Propagation.MANDATORY)
-	public void delete(final E entity)
-	{
-		super.delete(entity, this.entityClass);
-	}
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void delete(final I id)
+    {
+        super.delete(id, this.entityClass);
+    }
 
-	@Override
-	@Transactional(propagation = Propagation.MANDATORY)
-	public void delete(final I id)
-	{
-		super.delete(id, this.entityClass);
-	}
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
+    public E find(final I id)
+    {
+        return super.find(id, this.entityClass);
+    }
 
-	@Override
-	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public E find(final I id)
-	{
-		return super.find(id, this.entityClass);
-	}
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
+    public long getCount()
+    {
+        return super.getCount(this.entityClass);
+    }
 
-	@Override
-	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public long getCount()
-	{
-		return super.getCount(this.entityClass);
-	}
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
+    public E load(final I id)
+    {
+        return super.load(id, this.entityClass);
+    }
 
-	@Override
-	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public E load(final I id)
-	{
-		return super.load(id, this.entityClass);
-	}
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
+    public List<E> findAll()
+    {
+        return super.findAll(this.entityClass);
+    }
 
-	@Override
-	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public List<E> findAll()
-	{
-		return super.findAll(this.entityClass);
-	}
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
+    public List<E> findAll(final SingularAttribute<? super E, ?> attribute, final boolean asc)
+    {
+        final CriteriaBuilder builder = this.getCriteriaBuilder();
+        final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
+        final Root<E> from = criteriaQuery.from(this.entityClass);
 
-	@Override
-	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public List<E> findAll(final SingularAttribute<? super E, ?> attribute, final boolean asc)
-	{
-		final CriteriaBuilder builder = this.getCriteriaBuilder();
-		final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
-		final Root<E> from = criteriaQuery.from(this.entityClass);
+        if (asc) {
+            criteriaQuery.orderBy(builder.asc(from.get(attribute)));
+        } else {
+            criteriaQuery.orderBy(builder.desc(from.get(attribute)));
+        }
 
-		if (asc) {
-			criteriaQuery.orderBy(builder.asc(from.get(attribute)));
-		} else {
-			criteriaQuery.orderBy(builder.desc(from.get(attribute)));
-		}
+        return this.find(criteriaQuery);
+    }
 
-		return this.find(criteriaQuery);
-	}
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
+    public List<E> findAll(final int firstResult, final int maxResults)
+    {
+        final CriteriaBuilder builder = this.getCriteriaBuilder();
+        final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
+        final Root<E> from = criteriaQuery.from(this.entityClass);
 
-	@Override
-	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public List<E> findAll(final int firstResult, final int maxResults)
-	{
-		final CriteriaBuilder builder = this.getCriteriaBuilder();
-		final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
-		final Root<E> from = criteriaQuery.from(this.entityClass);
+        return this.find(criteriaQuery, firstResult, maxResults);
+    }
 
-		return this.find(criteriaQuery, firstResult, maxResults);
-	}
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
+    public List<E> findAll(
+            final SingularAttribute<? super E, ?> attribute,
+            final boolean asc,
+            final int firstResult,
+            final int maxResults
+    )
+    {
+        final CriteriaBuilder builder = this.getCriteriaBuilder();
+        final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
+        final Root<E> from = criteriaQuery.from(this.entityClass);
 
-	@Override
-	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public List<E> findAll(
-			final SingularAttribute<? super E, ?> attribute,
-			final boolean asc,
-			final int firstResult,
-			final int maxResults)
-	{
-		final CriteriaBuilder builder = this.getCriteriaBuilder();
-		final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
-		final Root<E> from = criteriaQuery.from(this.entityClass);
+        if (attribute != null) {
+            if (asc) {
+                criteriaQuery.orderBy(builder.asc(from.get(attribute)));
+            } else {
+                criteriaQuery.orderBy(builder.desc(from.get(attribute)));
+            }
+        }
 
-		if (attribute != null) {
-			if (asc) {
-				criteriaQuery.orderBy(builder.asc(from.get(attribute)));
-			} else {
-				criteriaQuery.orderBy(builder.desc(from.get(attribute)));
-			}
-		}
+        return this.find(criteriaQuery, firstResult, maxResults);
+    }
 
-		return this.find(criteriaQuery, firstResult, maxResults);
-	}
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
+    public List<E> findAll(final PredicateBuilder<E> filter)
+    {
+        final CriteriaBuilder builder = this.getCriteriaBuilder();
+        final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
+        final Root<E> from = criteriaQuery.from(this.entityClass);
 
-	@Override
-	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public List<E> findAll(final PredicateBuilder<E> filter)
-	{
-		final CriteriaBuilder builder = this.getCriteriaBuilder();
-		final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
-		final Root<E> from = criteriaQuery.from(this.entityClass);
+        criteriaQuery.where(filter.createPredicate(builder, from));
 
-		criteriaQuery.where(filter.createPredicate(builder, from));
+        return this.find(criteriaQuery);
+    }
 
-		return this.find(criteriaQuery);
-	}
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
+    public List<E> findAll(final Collection<PredicateBuilder<E>> filters)
+    {
+        final CriteriaBuilder builder = this.getCriteriaBuilder();
+        final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
+        final Root<E> from = criteriaQuery.from(this.entityClass);
 
-	@Override
-	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public List<E> findAll(final Collection<PredicateBuilder<E>> filters)
-	{
-		final CriteriaBuilder builder = this.getCriteriaBuilder();
-		final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
-		final Root<E> from = criteriaQuery.from(this.entityClass);
+        final Predicate[] predicates = new Predicate[filters.size()];
+        int count = 0;
+        for (final PredicateBuilder<E> filter : filters) {
+            predicates[count] = filter.createPredicate(builder, from);
+            count++;
+        }
 
-		final Predicate[] predicates = new Predicate[filters.size()];
-		int count = 0;
-		for (final PredicateBuilder<E> filter : filters) {
-			predicates[count] = filter.createPredicate(builder, from);
-			count++;
-		}
+        criteriaQuery.where(predicates);
 
-		criteriaQuery.where(predicates);
+        return this.find(criteriaQuery);
+    }
 
-		return this.find(criteriaQuery);
-	}
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
+    public List<E> findAll(final PredicateBuilder<E>... filters)
+    {
+        final CriteriaBuilder builder = this.getCriteriaBuilder();
+        final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
+        final Root<E> from = criteriaQuery.from(this.entityClass);
 
-	@Override
-	@Transactional(propagation = Propagation.MANDATORY, readOnly = true)
-	public List<E> findAll(final PredicateBuilder<E>... filters)
-	{
-		final CriteriaBuilder builder = this.getCriteriaBuilder();
-		final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
-		final Root<E> from = criteriaQuery.from(this.entityClass);
+        final Predicate[] predicates = new Predicate[filters.length];
+        int count = 0;
+        for (final PredicateBuilder<E> filter : filters) {
+            predicates[count] = filter.createPredicate(builder, from);
+            count++;
+        }
 
-		final Predicate[] predicates = new Predicate[filters.length];
-		int count = 0;
-		for (final PredicateBuilder<E> filter : filters) {
-			predicates[count] = filter.createPredicate(builder, from);
-			count++;
-		}
+        criteriaQuery.where(predicates);
 
-		criteriaQuery.where(predicates);
-
-		return this.find(criteriaQuery);
-	}
+        return this.find(criteriaQuery);
+    }
 }

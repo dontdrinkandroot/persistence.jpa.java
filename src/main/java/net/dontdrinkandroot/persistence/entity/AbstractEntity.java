@@ -35,61 +35,61 @@ import javax.persistence.MappedSuperclass;
 public abstract class AbstractEntity<K> implements Entity<K>
 {
 
-	/**
-	 * Constructs an entity without the primary key being set.
-	 */
-	public AbstractEntity()
-	{
-		/* Noop */
-	}
+    /**
+     * Constructs an entity without the primary key being set.
+     */
+    public AbstractEntity()
+    {
+        /* Noop */
+    }
 
-	@Override
-	public String toString()
-	{
-		return this.getClass().getSimpleName() + "[id=" + this.getId() + "]";
-	}
+    @Override
+    public String toString()
+    {
+        return this.getClass().getSimpleName() + "[id=" + this.getId() + "]";
+    }
 
-	@Override
-	public int hashCode()
-	{
-		/* Only considers the id if set */
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (this.getId() == null ? 0 : this.getId().hashCode());
-		return result;
-	}
+    @Override
+    public int hashCode()
+    {
+        /* Only considers the id if set */
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (this.getId() == null ? 0 : this.getId().hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean equals(final Object obj)
-	{
-		if (this == obj) {
-			/* Identity */
-			return true;
-		}
+    @Override
+    public boolean equals(final Object obj)
+    {
+        if (this == obj) {
+            /* Identity */
+            return true;
+        }
 
-		if (obj == null) {
-			/* Other is null */
-			return false;
-		}
+        if (obj == null) {
+            /* Other is null */
+            return false;
+        }
 
-		if (this.getClass() != obj.getClass()) {
-			/* Classes don't match */
-			return false;
-		}
+        if (this.getClass() != obj.getClass()) {
+            /* Classes don't match */
+            return false;
+        }
 
-		final AbstractEntity<?> other = (AbstractEntity<?>) obj;
+        final AbstractEntity<?> other = (AbstractEntity<?>) obj;
 
-		if (this.getId() == null) {
-			if (other.getId() != null) {
-				/* Both ids are null */
-				return false;
-			}
-		} else if (!this.getId().equals(other.getId())) {
-			/* Ids are not equal */
-			return false;
-		}
+        if (this.getId() == null) {
+            if (other.getId() != null) {
+                /* Both ids are null */
+                return false;
+            }
+        } else if (!this.getId().equals(other.getId())) {
+            /* Ids are not equal */
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
 }

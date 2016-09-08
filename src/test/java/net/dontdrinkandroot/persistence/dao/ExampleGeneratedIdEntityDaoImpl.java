@@ -17,84 +17,79 @@
  */
 package net.dontdrinkandroot.persistence.dao;
 
-import java.util.List;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ListJoin;
-import javax.persistence.criteria.Root;
-
 import net.dontdrinkandroot.persistence.ExampleEnum;
 import net.dontdrinkandroot.persistence.entity.ExampleGeneratedIdEntity;
 import net.dontdrinkandroot.persistence.entity.ExampleGeneratedIdEntity_;
 import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
 import net.dontdrinkandroot.persistence.entity.ExampleIdEntity_;
-
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ListJoin;
+import javax.persistence.criteria.Root;
+import java.util.List;
 
 
 public class ExampleGeneratedIdEntityDaoImpl extends JpaEntityDao<ExampleGeneratedIdEntity, Long>
-		implements ExampleGeneratedIdEntityDao
+        implements ExampleGeneratedIdEntityDao
 {
 
-	public ExampleGeneratedIdEntityDaoImpl()
-	{
-		super(ExampleGeneratedIdEntity.class);
-	}
+    public ExampleGeneratedIdEntityDaoImpl()
+    {
+        super(ExampleGeneratedIdEntity.class);
+    }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<ExampleGeneratedIdEntity> findByOtherText(final String text)
+    {
+        final CriteriaBuilder builder = this.getCriteriaBuilder();
+        final CriteriaQuery<ExampleGeneratedIdEntity> criteriaQuery = builder.createQuery(this.entityClass);
+        criteriaQuery.distinct(true);
+        final Root<ExampleGeneratedIdEntity> root = criteriaQuery.from(this.entityClass);
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<ExampleGeneratedIdEntity> findByOtherText(final String text)
-	{
-		final CriteriaBuilder builder = this.getCriteriaBuilder();
-		final CriteriaQuery<ExampleGeneratedIdEntity> criteriaQuery = builder.createQuery(this.entityClass);
-		criteriaQuery.distinct(true);
-		final Root<ExampleGeneratedIdEntity> root = criteriaQuery.from(this.entityClass);
+        final ListJoin<ExampleGeneratedIdEntity, ExampleIdEntity> join =
+                root.join(ExampleGeneratedIdEntity_.otherEntities);
 
-		final ListJoin<ExampleGeneratedIdEntity, ExampleIdEntity> join =
-				root.join(ExampleGeneratedIdEntity_.otherEntities);
+        criteriaQuery.where(builder.equal(join.get(ExampleIdEntity_.text), text));
 
-		criteriaQuery.where(builder.equal(join.get(ExampleIdEntity_.text), text));
+        return this.find(criteriaQuery);
+    }
 
-		return this.find(criteriaQuery);
-	}
+    @Override
+    @Transactional(readOnly = true)
+    public ExampleEnum findMaxEnum()
+    {
+        final CriteriaBuilder builder = this.getCriteriaBuilder();
+        final CriteriaQuery<ExampleEnum> criteriaQuery = builder.createQuery(ExampleEnum.class);
+        final Root<ExampleGeneratedIdEntity> root = criteriaQuery.from(this.entityClass);
 
+        criteriaQuery.select(root.get(ExampleGeneratedIdEntity_.exampleEnum));
 
-	@Override
-	@Transactional(readOnly = true)
-	public ExampleEnum findMaxEnum()
-	{
-		final CriteriaBuilder builder = this.getCriteriaBuilder();
-		final CriteriaQuery<ExampleEnum> criteriaQuery = builder.createQuery(ExampleEnum.class);
-		final Root<ExampleGeneratedIdEntity> root = criteriaQuery.from(this.entityClass);
+        final List<ExampleEnum> enums = this.getEntityManager().createQuery(criteriaQuery).getResultList();
+        ExampleEnum max = null;
+        for (final ExampleEnum exampleEnum : enums) {
+            if (max == null || exampleEnum.ordinal() > max.ordinal()) {
+                max = exampleEnum;
+            }
+        }
 
-		criteriaQuery.select(root.get(ExampleGeneratedIdEntity_.exampleEnum));
+        return max;
+    }
 
-		final List<ExampleEnum> enums = this.getEntityManager().createQuery(criteriaQuery).getResultList();
-		ExampleEnum max = null;
-		for (final ExampleEnum exampleEnum : enums) {
-			if (max == null || exampleEnum.ordinal() > max.ordinal()) {
-				max = exampleEnum;
-			}
-		}
+    @Override
+    @Transactional(readOnly = true)
+    public ExampleGeneratedIdEntity findWithOthersFetchJoin(final Long id)
+    {
+        final CriteriaBuilder builder = this.getCriteriaBuilder();
+        final CriteriaQuery<ExampleGeneratedIdEntity> criteriaQuery =
+                builder.createQuery(ExampleGeneratedIdEntity.class);
+        final Root<ExampleGeneratedIdEntity> root = criteriaQuery.from(this.entityClass);
+        root.fetch(ExampleGeneratedIdEntity_.otherEntities);
 
-		return max;
-	}
+        criteriaQuery.where(builder.equal(root.get(ExampleGeneratedIdEntity_.id), id));
 
-
-	@Override
-	@Transactional(readOnly = true)
-	public ExampleGeneratedIdEntity findWithOthersFetchJoin(final Long id)
-	{
-		final CriteriaBuilder builder = this.getCriteriaBuilder();
-		final CriteriaQuery<ExampleGeneratedIdEntity> criteriaQuery =
-				builder.createQuery(ExampleGeneratedIdEntity.class);
-		final Root<ExampleGeneratedIdEntity> root = criteriaQuery.from(this.entityClass);
-		root.fetch(ExampleGeneratedIdEntity_.otherEntities);
-
-		criteriaQuery.where(builder.equal(root.get(ExampleGeneratedIdEntity_.id), id));
-
-		return this.findSingle(criteriaQuery);
-	}
+        return this.findSingle(criteriaQuery);
+    }
 }

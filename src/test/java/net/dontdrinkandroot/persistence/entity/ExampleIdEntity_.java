@@ -27,7 +27,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class ExampleIdEntity_ extends net.dontdrinkandroot.persistence.entity.AbstractIdEntity_
 {
 
-	public static volatile SingularAttribute<ExampleIdEntity, String> text;
+    public static volatile SingularAttribute<ExampleIdEntity, String> text;
 
-	public static volatile SingularAttribute<ExampleIdEntity, Long> number;
+    public static volatile SingularAttribute<ExampleIdEntity, Long> number;
 }
