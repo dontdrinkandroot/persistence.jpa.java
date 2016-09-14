@@ -1,7 +1,8 @@
+*.iml
+/.idea/
 target
 .factorypath
 .apt_generated
 .project
 .settings
 .classpath
-/persistence.jpa.iml
