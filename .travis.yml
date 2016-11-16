@@ -1,16 +1,16 @@
 language: java
 
 jdk:
-  - oraclejdk8
+- oraclejdk8
 
 cache:
   directories:
-    - '$HOME/.m2/repository'
+  - "$HOME/.m2/repository"
 
 env:
   global:
-  - NEXUS_USERNAME=travis
-  - secure: V5EK5xgOI/NzfyefqZtR5SUWZYi627fmuF9Qar32IiiX+jNa4xkp30J2ZXqIhV4ff9/KlDu1IdovuXCDGwf46fEKQwWJHajDqbztqdKObcKcKecqlO01DYyAey+l+yy2eOB0bbS1spK82LczpJDPBgXYx6AJDkPrtJmnwLU00PY=
+  - secure: nGcP2qakBduOzboFW5PH5Ro2J93tqo3sjZC0C+Bl4uIGeB4RC/3I/0tstdEg3NSUzkB3QLX+twGnY7Pr8szT+EwcGxmigNOM+b6c1CjcaDmR+MpZo2jc1A/LsGjC3k6xFbc9RpBlPIrl1D3AzNbqp5zkKYAG5X/KPm9i5fSQ0WU=
+  - secure: ajQCZ5MQKl0JplmSfLJCUWkI4EEIFNSxC+aIOMcj18e+3UsIgdP87/EbWXvO9F1MW9DFjSUWW063WELFeOk3MFlohFfLA0PDQgFsx11QMuLnpRTFUSHkEi862c432oYyvOv6sR314QC0FtUtS2mLh5KK20Yx5CjbsB121ZnA+LI=
 
 script:
-  - mvn -DfailOnServiceError=false clean jacoco:prepare-agent test deploy jacoco:report coveralls:report --settings travis-maven-settings.xml
+- mvn -DfailOnServiceError=false clean jacoco:prepare-agent test deploy jacoco:report coveralls:report --settings travis-maven-settings.xml
