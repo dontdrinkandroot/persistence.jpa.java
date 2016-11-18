@@ -56,7 +56,7 @@
     </distributionManagement>
 
     <properties>
-
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.maven-compiler-plugin>3.5.1</version.maven-compiler-plugin>
         <version.maven-source-plugin>3.0.1</version.maven-source-plugin>
         <version.maven-javadoc-plugin>2.10.4</version.maven-javadoc-plugin>
