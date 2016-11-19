@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -20,13 +20,11 @@ package net.dontdrinkandroot.persistence.pagination;
 import java.io.Serializable;
 import java.util.List;
 
-
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 public class PaginatedResult<T> implements Serializable
 {
-
     private final Pagination pagination;
 
     private final List<T> entries;

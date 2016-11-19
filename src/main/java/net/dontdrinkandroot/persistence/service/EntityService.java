@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -29,7 +29,6 @@ import java.util.List;
  */
 public interface EntityService<E extends Entity<I>, I>
 {
-
     E find(I id);
 
     E save(E entity);

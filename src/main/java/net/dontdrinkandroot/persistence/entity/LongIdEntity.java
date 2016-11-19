@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -27,7 +27,6 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class LongIdEntity extends AbstractEntity<Long>
 {
-
     @Id
     private Long id;
 
@@ -45,5 +44,4 @@ public class LongIdEntity extends AbstractEntity<Long>
     {
         return this.id;
     }
-
 }

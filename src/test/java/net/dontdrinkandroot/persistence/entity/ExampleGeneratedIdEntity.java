@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -28,7 +28,6 @@ import java.util.List;
 @javax.persistence.Entity
 public class ExampleGeneratedIdEntity extends GeneratedLongIdEntity
 {
-
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.JOIN)
     private List<ExampleIdEntity> otherEntities;

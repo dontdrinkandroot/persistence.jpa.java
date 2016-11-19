@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -22,13 +22,11 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.metamodel.SingularAttribute;
 
-
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 public class NullPredicateBuilder<T> implements PredicateBuilder<T>
 {
-
     private final boolean isNull;
 
     private final SingularAttribute<? super T, ?> attribute;
@@ -48,5 +46,4 @@ public class NullPredicateBuilder<T> implements PredicateBuilder<T>
             return builder.isNotNull(root.get(this.attribute));
         }
     }
-
 }

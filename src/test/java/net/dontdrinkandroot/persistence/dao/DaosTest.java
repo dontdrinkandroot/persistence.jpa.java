@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -39,7 +39,6 @@ import java.util.List;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public class DaosTest
 {
-
     @Autowired
     private ExampleIdEntityDao entityDao;
 
@@ -231,5 +230,4 @@ public class DaosTest
         Assert.assertEquals(1, threeResults.size());
         Assert.assertEquals(ex2, threeResults.iterator().next());
     }
-
 }

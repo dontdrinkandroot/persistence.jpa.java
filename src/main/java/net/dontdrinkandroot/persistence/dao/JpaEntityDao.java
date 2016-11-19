@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -44,7 +44,6 @@ import java.util.List;
  */
 public class JpaEntityDao<E extends Entity<I>, I> extends JpaGenericDao implements EntityDao<E, I>
 {
-
     protected Class<E> entityClass;
 
     public JpaEntityDao(final Class<E> entityClass)

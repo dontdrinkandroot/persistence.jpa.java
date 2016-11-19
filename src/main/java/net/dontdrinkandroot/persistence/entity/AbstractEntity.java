@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -34,7 +34,6 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class AbstractEntity<K> implements Entity<K>
 {
-
     /**
      * Constructs an entity without the primary key being set.
      */
@@ -91,5 +90,4 @@ public abstract class AbstractEntity<K> implements Entity<K>
 
         return true;
     }
-
 }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -34,7 +34,6 @@ import java.util.List;
 public class ExampleGeneratedIdEntityDaoImpl extends JpaEntityDao<ExampleGeneratedIdEntity, Long>
         implements ExampleGeneratedIdEntityDao
 {
-
     public ExampleGeneratedIdEntityDaoImpl()
     {
         super(ExampleGeneratedIdEntity.class);

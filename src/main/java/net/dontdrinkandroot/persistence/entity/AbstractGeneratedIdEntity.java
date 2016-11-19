@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -33,7 +33,6 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class AbstractGeneratedIdEntity<K> extends AbstractEntity<K>
 {
-
     @Id
     @GeneratedValue
     private K id;
@@ -43,5 +42,4 @@ public abstract class AbstractGeneratedIdEntity<K> extends AbstractEntity<K>
     {
         return this.id;
     }
-
 }

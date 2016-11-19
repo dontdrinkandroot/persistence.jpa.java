@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -38,7 +38,6 @@ import javax.persistence.criteria.Root;
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public class NumericEntityDaoTest extends JpaEntityDao<NumericEntity, Long>
 {
-
     public NumericEntityDaoTest()
     {
         super(NumericEntity.class);

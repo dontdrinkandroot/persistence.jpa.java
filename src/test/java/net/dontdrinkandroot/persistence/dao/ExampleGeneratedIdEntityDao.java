@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -25,11 +25,9 @@ import java.util.List;
 
 public interface ExampleGeneratedIdEntityDao extends EntityDao<ExampleGeneratedIdEntity, Long>
 {
-
     List<ExampleGeneratedIdEntity> findByOtherText(String text);
 
     ExampleEnum findMaxEnum();
 
     ExampleGeneratedIdEntity findWithOthersFetchJoin(Long id);
-
 }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -28,7 +28,6 @@ import javax.persistence.metamodel.SingularAttribute;
  */
 public class NumericPredicateBuilder<T> implements PredicateBuilder<T>
 {
-
     private final NumericOperator operator;
 
     private final Number literal;
@@ -70,5 +69,4 @@ public class NumericPredicateBuilder<T> implements PredicateBuilder<T>
                 throw new RuntimeException("Unknown operator " + this.operator);
         }
     }
-
 }

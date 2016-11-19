@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -22,11 +22,9 @@ import net.dontdrinkandroot.persistence.entity.ExampleIdEntity;
 
 public class ExampleIdEntityDaoImpl extends JpaEntityDao<ExampleIdEntity, Long> implements ExampleIdEntityDao
 {
-
     public ExampleIdEntityDaoImpl()
     {
 
         super(ExampleIdEntity.class);
     }
-
 }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -25,7 +25,6 @@ import java.io.Serializable;
  */
 public class Pagination implements Serializable
 {
-
     private final int perPage;
 
     private final int currentPage;

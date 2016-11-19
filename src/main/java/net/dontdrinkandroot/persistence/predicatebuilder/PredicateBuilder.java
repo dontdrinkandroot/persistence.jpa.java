@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012-2016 Philip Washington Sorst <philip@sorst.net>
  * and individual contributors as indicated
  * by the @authors tag.
@@ -34,10 +34,8 @@ import javax.persistence.criteria.Predicate;
  */
 public interface PredicateBuilder<E>
 {
-
     /**
      * Builds a predicate with the given builder that is derived from the given path.
      */
     Predicate createPredicate(CriteriaBuilder builder, Path<? extends E> path);
-
 }
