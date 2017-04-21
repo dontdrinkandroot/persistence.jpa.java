@@ -23,7 +23,6 @@ import net.dontdrinkandroot.persistence.pagination.PaginatedResult;
 import javax.persistence.metamodel.SingularAttribute;
 import java.util.List;
 
-
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */

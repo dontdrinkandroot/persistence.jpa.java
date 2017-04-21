@@ -19,16 +19,13 @@ package net.dontdrinkandroot.persistence.entity;
 
 import javax.persistence.MappedSuperclass;
 
-
 /**
  * Represents an entity with a primary key. The method getId() must be implemented, even if the primary key has a
  * different field name, also make sure that the primary key implements equals/hashcode correctly. hashCode() and
  * equals() are based on the id, so make sure not to use id in any context where these methods are important while no id
  * is set (e.g. in HashMaps) or you must override them.
  *
- * @param <K>
- *            Type of the primary key.
- *
+ * @param <K> Type of the primary key.
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 @MappedSuperclass

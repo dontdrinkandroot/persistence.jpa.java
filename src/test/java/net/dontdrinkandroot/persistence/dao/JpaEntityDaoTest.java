@@ -31,16 +31,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
-
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:database.xml" })
+@ContextConfiguration(locations = {"classpath:database.xml"})
 @Rollback
 public class JpaEntityDaoTest
 {
@@ -73,12 +73,12 @@ public class JpaEntityDaoTest
         this.populateDatabase();
 
         List<ExampleIdEntity> entities = this.dao.findAll(ExampleIdEntity_.text, true);
-        Assert.assertEquals(100, entities.size());
+        Assert.assertEquals(101, entities.size());
         Assert.assertEquals("10", entities.get(2).getText());
 
         entities = this.dao.findAll(ExampleIdEntity_.text, false);
 
-        Assert.assertEquals(100, entities.size());
+        Assert.assertEquals(101, entities.size());
         Assert.assertEquals("9", entities.get(10).getText());
     }
 
@@ -98,6 +98,36 @@ public class JpaEntityDaoTest
         Assert.assertEquals(89, entities.size());
     }
 
+    @Test
+    @Transactional(transactionManager = "transactionManager")
+    public void testFindSingle()
+    {
+        this.populateDatabase();
+
+        ExampleIdEntity entity = this.dao.find(ExampleIdEntity_.text, "3");
+        Assert.assertNotNull(entity);
+        Assert.assertEquals(new Long(3), entity.getId());
+    }
+
+    @Test
+    @Transactional(transactionManager = "transactionManager")
+    public void testFindSingleWithNoResult()
+    {
+        this.populateDatabase();
+
+        ExampleIdEntity entity = this.dao.find(ExampleIdEntity_.text, "asdfjhasdfklhjasf");
+        Assert.assertNull(entity);
+    }
+
+    @Test(expected = NonUniqueResultException.class)
+    @Transactional(transactionManager = "transactionManager")
+    public void testFindSingleWithDuplicate()
+    {
+        this.populateDatabase();
+
+        ExampleIdEntity entity = this.dao.find(ExampleIdEntity_.text, "2");
+    }
+
     private void populateDatabase()
     {
         for (long i = 0; i < 100; i++) {
@@ -105,6 +135,10 @@ public class JpaEntityDaoTest
             entity.setNumber(i);
             this.dao.save(entity, false);
         }
+        /* Duplicate */
+        ExampleIdEntity entity = new ExampleIdEntity(100, "2");
+        entity.setNumber(2L);
+        this.dao.save(entity);
         this.dao.flush();
     }
 }

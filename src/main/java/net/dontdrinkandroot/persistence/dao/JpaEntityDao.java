@@ -31,15 +31,11 @@ import javax.persistence.metamodel.SingularAttribute;
 import java.util.Collection;
 import java.util.List;
 
-
 /**
  * Base implementation of a {@link EntityDao} that uses a JPA {@link EntityManager}.
  *
- * @param <E>
- *            Type of the {@link Entity}.
- * @param <I>
- *            Type of the {@link Entity}'s id.
- *
+ * @param <E> Type of the {@link Entity}.
+ * @param <I> Type of the {@link Entity}'s id.
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 public class JpaEntityDao<E extends Entity<I>, I> extends JpaGenericDao implements EntityDao<E, I>
@@ -70,6 +66,18 @@ public class JpaEntityDao<E extends Entity<I>, I> extends JpaGenericDao implemen
     public E find(final I id)
     {
         return super.find(id, this.entityClass);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.MANDATORY, readOnly = true)
+    public <T> E find(SingularAttribute<? super E, T> attribute, T value)
+    {
+        final CriteriaBuilder builder = this.getCriteriaBuilder();
+        final CriteriaQuery<E> criteriaQuery = builder.createQuery(this.entityClass);
+        final Root<E> from = criteriaQuery.from(this.entityClass);
+        criteriaQuery.where(builder.equal(from.get(attribute), value));
+
+        return this.findSingleOrNull(criteriaQuery);
     }
 
     @Override

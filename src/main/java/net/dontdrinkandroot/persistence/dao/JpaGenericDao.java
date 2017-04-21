@@ -33,7 +33,6 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-
 /**
  * Base implementation of a {@link GenericDao} that uses a JPA {@link EntityManager}.
  *
@@ -220,10 +219,8 @@ public class JpaGenericDao implements GenericDao
     /**
      * Finds all entities by the given {@link CriteriaQuery} and limit the result set.
      *
-     * @param firstResult
-     *            Position of the first result to retrive.
-     * @param maxResults
-     *            The maximum number of results to retrieve.
+     * @param firstResult Position of the first result to retrive.
+     * @param maxResults  The maximum number of results to retrieve.
      */
     protected <V> List<V> find(final CriteriaQuery<V> criteriaQuery, final int firstResult, final int maxResults)
     {
@@ -270,8 +267,7 @@ public class JpaGenericDao implements GenericDao
     /**
      * Finds the first entity by the given {@link CriteriaQuery} or null if no result was found.
      *
-     * @param criteriaQuery
-     *            Query to execute.
+     * @param criteriaQuery Query to execute.
      * @return The found entity or null if there was none found.
      */
     protected <V> V findFirstOrNull(CriteriaQuery<V> criteriaQuery)

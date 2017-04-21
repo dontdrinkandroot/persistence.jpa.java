@@ -20,7 +20,6 @@ package net.dontdrinkandroot.persistence.entity;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */

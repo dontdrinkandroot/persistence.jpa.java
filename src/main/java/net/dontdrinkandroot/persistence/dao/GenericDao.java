@@ -21,7 +21,6 @@ import net.dontdrinkandroot.persistence.entity.Entity;
 
 import java.util.List;
 
-
 /**
  * General contract of a Data Access Object that manages {@link Entity} instances.
  *

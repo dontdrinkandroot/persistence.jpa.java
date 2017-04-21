@@ -21,13 +21,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-
 /**
  * {@link AbstractEntity} that has a primary key which is automatically generated.
  *
- * @param <K>
- *            Type of the primary key.
- *
+ * @param <K> Type of the primary key.
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 @MappedSuperclass

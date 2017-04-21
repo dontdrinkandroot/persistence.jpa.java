@@ -20,6 +20,7 @@ package net.dontdrinkandroot.persistence.dao;
 import net.dontdrinkandroot.persistence.entity.Entity;
 import net.dontdrinkandroot.persistence.predicatebuilder.PredicateBuilder;
 
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.metamodel.SingularAttribute;
 import java.util.Collection;
 import java.util.List;
@@ -57,6 +58,17 @@ public interface EntityDao<E extends Entity<K>, K> extends GenericDao
      * Loads the entity with the given id or throws an Exception if it was not found.
      */
     E load(K id);
+
+    /**
+     * Finds a single entity by an attribute value.
+     *
+     * @param attribute The attribute to check.
+     * @param value     The desired value of the attribute.
+     * @param <T>       The type of the attribue.
+     * @return The entity matching the attribute or null if non was found.
+     * @throws NonUniqueResultException Thrown if more than one result was found.
+     */
+    <T> E find(SingularAttribute<? super E, T> attribute, T value);
 
     /**
      * Get the total number of entities in this Dao.

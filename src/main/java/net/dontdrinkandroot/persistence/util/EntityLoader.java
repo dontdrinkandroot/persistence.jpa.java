@@ -19,10 +19,22 @@ package net.dontdrinkandroot.persistence.util;
 
 import net.dontdrinkandroot.persistence.entity.Entity;
 
+import javax.persistence.NoResultException;
+
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 public interface EntityLoader
 {
+    /**
+     * Loads an entity by its it.
+     *
+     * @param id          The id to look for.
+     * @param entityClass The class of the entity.
+     * @param <T>         The type of the entity.
+     * @param <K>         The type of the primary key of the entity.
+     * @return The entity.
+     * @throws NoResultException Thrown if the entity was not found.
+     */
     <T extends Entity<K>, K> T load(K id, Class<T> entityClass);
 }

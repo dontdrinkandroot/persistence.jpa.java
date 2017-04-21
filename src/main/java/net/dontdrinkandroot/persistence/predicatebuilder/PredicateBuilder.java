@@ -23,13 +23,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 
-
 /**
  * A PredicateBuillder is an abstraction to generate a {@link Predicate} for an {@link Entity}.
  *
- * @param <E>
- *            Type of the {@link Entity} to build the {@link Predicate} for.
- *
+ * @param <E> Type of the {@link Entity} to build the {@link Predicate} for.
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 public interface PredicateBuilder<E>

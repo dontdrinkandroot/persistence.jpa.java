@@ -19,18 +19,16 @@ package net.dontdrinkandroot.persistence.entity;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-
+import java.io.Serializable;
 
 /**
  * {@link AbstractEntity} that has a primary key which needs to be assigned manually.
  *
- * @param <K>
- *            Type of the primary key.
- *
+ * @param <K> Type of the primary key.
  * @author Philip Washington Sorst <philip@sorst.net>
  */
 @MappedSuperclass
-public abstract class AbstractIdEntity<K> extends AbstractEntity<K>
+public abstract class AbstractIdEntity<K extends Serializable> extends AbstractEntity<K>
 {
     @Id
     private K id;

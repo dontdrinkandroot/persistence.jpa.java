@@ -22,7 +22,6 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.metamodel.SingularAttribute;
 
-
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
